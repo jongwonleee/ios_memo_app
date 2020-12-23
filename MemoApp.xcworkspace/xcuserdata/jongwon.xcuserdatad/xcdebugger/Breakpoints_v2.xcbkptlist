@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "CCAA045A-BD08-4514-A583-50D2EBBD25C3"
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BE1335AB-81C2-4CDF-AD9E-72B1CE43D732"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MemoApp/layout/vc/MemoListViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "11"
+            endingLineNumber = "11"
+            landmarkName = "MemoListViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "BE1335AB-81C2-4CDF-AD9E-72B1CE43D732 - 8e7e2d20d9551f84"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MemoApp.MemoListViewController.__deallocating_deinit"
+                  moduleName = "MemoApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jongwon/Documents/LINE%20%E1%84%89%E1%85%B5%E1%86%AB%E1%84%8B%E1%85%B5%E1%86%B8%E1%84%80%E1%85%AD%E1%84%8B%E1%85%B2%E1%86%A8/MemoApp/MemoApp/layout/vc/MemoListViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "BE1335AB-81C2-4CDF-AD9E-72B1CE43D732 - 4fcc8d37d875aa9b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MemoApp.MemoListViewController.__allocating_init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; MemoApp.MemoListViewController"
+                  moduleName = "MemoApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jongwon/Documents/LINE%20%E1%84%89%E1%85%B5%E1%86%AB%E1%84%8B%E1%85%B5%E1%86%B8%E1%84%80%E1%85%AD%E1%84%8B%E1%85%B2%E1%86%A8/MemoApp/MemoApp/layout/vc/MemoListViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  uuid = "BE1335AB-81C2-4CDF-AD9E-72B1CE43D732 - e64d031be1490e99"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MemoApp.MemoListViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; MemoApp.MemoListViewController"
+                  moduleName = "MemoApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jongwon/Documents/LINE%20%E1%84%89%E1%85%B5%E1%86%AB%E1%84%8B%E1%85%B5%E1%86%B8%E1%84%80%E1%85%AD%E1%84%8B%E1%85%B2%E1%86%A8/MemoApp/MemoApp/layout/vc/MemoListViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "257">
+               </Location>
+               <Location
+                  uuid = "BE1335AB-81C2-4CDF-AD9E-72B1CE43D732 - fbb3606dd002ae42"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MemoApp.MemoListViewController.__allocating_init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;MemoApp.MemoListViewController&gt;"
+                  moduleName = "MemoApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jongwon/Documents/LINE%20%E1%84%89%E1%85%B5%E1%86%AB%E1%84%8B%E1%85%B5%E1%86%B8%E1%84%80%E1%85%AD%E1%84%8B%E1%85%B2%E1%86%A8/MemoApp/MemoApp/layout/vc/MemoListViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  uuid = "BE1335AB-81C2-4CDF-AD9E-72B1CE43D732 - bce31034d9fe7b92"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MemoApp.MemoListViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;MemoApp.MemoListViewController&gt;"
+                  moduleName = "MemoApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jongwon/Documents/LINE%20%E1%84%89%E1%85%B5%E1%86%AB%E1%84%8B%E1%85%B5%E1%86%B8%E1%84%80%E1%85%AD%E1%84%8B%E1%85%B2%E1%86%A8/MemoApp/MemoApp/layout/vc/MemoListViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "198">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

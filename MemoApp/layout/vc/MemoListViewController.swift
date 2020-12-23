@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class MemoListViewController: UIViewController {
+class MemoListViewController: UIViewController{ //, UICollectionViewDataSource, UICollectionViewDelegate
     
     private lazy var guide:ConstraintLayoutGuideDSL = {
         return self.view.safeAreaLayoutGuide.snp
@@ -34,7 +34,6 @@ class MemoListViewController: UIViewController {
     
     private lazy var collectionView:UICollectionView = {
         let collectionView:UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout.init())
-        collectionView.backgroundColor = .black
         return collectionView
     }()
     
@@ -55,6 +54,9 @@ class MemoListViewController: UIViewController {
     private func setUI(){
         self.view.backgroundColor = .white
         
+//        collectionView.register(MemoViewCell.self, forCellWithReuseIdentifier:"RowCell")
+//        collectionView.delegate = self
+//        collectionView.dataSource = self
         self.view.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
             make.trailing.equalTo(guide.trailing)
@@ -85,8 +87,62 @@ class MemoListViewController: UIViewController {
         vc.editNo = -1
         self.navigationController?.pushViewController(vc, animated: true)
     }
-
-
+//    
+//    
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        
+//        //이미지 카운터 하는 함수
+//        
+//        return 10
+//        
+//    }
+//    
+//    
+//    
+//    //셀 구성하기
+//    
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RowCell", for: indexPath) as! MemoViewCell
+//        cell.titleTV.text = "!"
+//        
+//        return cell
+//        
+//    }
+//    
+//    
+//    
+//    
+//    
+//    // 사이즈
+//    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        
+//        let collectionViewCellWithd = collectionView.frame.width / 2 - 1
+//        
+//        return CGSize(width: collectionViewCellWithd, height: collectionViewCellWithd)
+//        
+//    }
+//    
+//    
+//    
+//    //위아래 라인 간격
+//    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+//        
+//        return 1
+//        
+//    }
+//    
+//    //옆 라인 간격
+//    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+//        
+//        return 1
+//        
+//    }
+    
+    
 
 }
 
