@@ -7,7 +7,6 @@
 
 import UIKit
 import SnapKit
-import SVGKit
 
 class ViewController: UIViewController {
     
@@ -16,8 +15,8 @@ class ViewController: UIViewController {
     let buttonAdd:UIButton = UIButton()
     let collectionView:UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout.init())
     
-    let imagePlus:SGVKImage = SVGKImage(named: "plus")
-    let imageSort:SGVKImage = SVGKImage(named: "sort")
+    let imagePlus:UIImage? = UIImage(named: "plus")
+    let imageSort:UIImage? = UIImage(named: "sort")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,18 +38,19 @@ class ViewController: UIViewController {
         }
         
         self.view.addSubview(buttonSort)
-        //buttonSort.backgroundColor = .red
+        buttonSort.backgroundColor = .red
+        buttonSort.setImage(imageSort, for: .normal)
         buttonSort.snp.makeConstraints { make in
             make.leading.equalTo(guide.leading).offset(10)
             make.top.equalTo(guide.top).offset(10)
             make.width.equalTo(30)
             make.height.equalTo(30)
         }
-    
         buttonSort.addTarget(self, action: #selector(onButtonActionSheetClicked), for: .touchUpInside)
         
         self.view.addSubview(buttonAdd)
         buttonAdd.backgroundColor = .blue
+        buttonAdd.setImage(imagePlus, for: .normal)
         buttonAdd.snp.makeConstraints { make in
             make.trailing.equalTo(guide.trailing).offset(-10)
             make.top.equalTo(guide.top).offset(10)

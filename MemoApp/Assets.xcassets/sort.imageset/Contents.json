@@ -1,23 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "descendant.svg",
-      "idiom" : "universal",
-      "scale" : "1x"
-    },
-    {
-      "filename" : "descendant-1.svg",
-      "idiom" : "universal",
-      "scale" : "2x"
-    },
-    {
-      "filename" : "descendant-2.svg",
-      "idiom" : "universal",
-      "scale" : "3x"
+      "filename" : "descendant.pdf",
+      "idiom" : "universal"
     }
   ],
   "info" : {
     "author" : "xcode",
     "version" : 1
+  },
+  "properties" : {
+    "preserves-vector-representation" : true
   }
 }

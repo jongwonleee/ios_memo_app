@@ -9,8 +9,7 @@
 /* Begin PBXBuildFile section */
 		1244C934E9198EB45D4F4202 /* Pods_MemoApp_MemoAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB23C42F97883952A73255E /* Pods_MemoApp_MemoAppUITests.framework */; };
 		B0E4224F16274DF5F6072A1E /* Pods_MemoAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 318E6CA2EB9AEB89A0FD6C95 /* Pods_MemoAppTests.framework */; };
-		C135B2EC2590FB5C005ECC91 /* descendant.svg in Resources */ = {isa = PBXBuildFile; fileRef = C135B2EA2590FB5C005ECC91 /* descendant.svg */; };
-		C135B2ED2590FB5C005ECC91 /* plus.svg in Resources */ = {isa = PBXBuildFile; fileRef = C135B2EB2590FB5C005ECC91 /* plus.svg */; };
+		C12EB03F25932F0C00F1E905 /* MemoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12EB03E25932F0C00F1E905 /* MemoDetailViewController.swift */; };
 		C1E498302590703B00840AD7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1E4982F2590703B00840AD7 /* AppDelegate.swift */; };
 		C1E498322590703B00840AD7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1E498312590703B00840AD7 /* SceneDelegate.swift */; };
 		C1E498342590703B00840AD7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1E498332590703B00840AD7 /* ViewController.swift */; };
@@ -46,8 +45,7 @@
 		318E6CA2EB9AEB89A0FD6C95 /* Pods_MemoAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MemoAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		58AFBFFF330889F42A07113C /* Pods-MemoAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MemoAppTests.release.xcconfig"; path = "Target Support Files/Pods-MemoAppTests/Pods-MemoAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		93B299080E58C8BD3B62DA6B /* Pods-MemoApp-MemoAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MemoApp-MemoAppUITests.release.xcconfig"; path = "Target Support Files/Pods-MemoApp-MemoAppUITests/Pods-MemoApp-MemoAppUITests.release.xcconfig"; sourceTree = "<group>"; };
-		C135B2EA2590FB5C005ECC91 /* descendant.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = descendant.svg; path = ../../../../Downloads/descendant.svg; sourceTree = "<group>"; };
-		C135B2EB2590FB5C005ECC91 /* plus.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = plus.svg; path = ../../../../Downloads/plus.svg; sourceTree = "<group>"; };
+		C12EB03E25932F0C00F1E905 /* MemoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoDetailViewController.swift; sourceTree = "<group>"; };
 		C1E4982C2590703B00840AD7 /* MemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1E4982F2590703B00840AD7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C1E498312590703B00840AD7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -135,10 +133,9 @@
 				C1E498332590703B00840AD7 /* ViewController.swift */,
 				C1E498352590703B00840AD7 /* Main.storyboard */,
 				C1E498382590704400840AD7 /* Assets.xcassets */,
-				C135B2EA2590FB5C005ECC91 /* descendant.svg */,
-				C135B2EB2590FB5C005ECC91 /* plus.svg */,
 				C1E4983A2590704400840AD7 /* LaunchScreen.storyboard */,
 				C1E4983D2590704400840AD7 /* Info.plist */,
+				C12EB03E25932F0C00F1E905 /* MemoDetailViewController.swift */,
 			);
 			path = MemoApp;
 			sourceTree = "<group>";
@@ -283,8 +280,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C1E4983C2590704400840AD7 /* LaunchScreen.storyboard in Resources */,
-				C135B2EC2590FB5C005ECC91 /* descendant.svg in Resources */,
-				C135B2ED2590FB5C005ECC91 /* plus.svg in Resources */,
 				C1E498392590704400840AD7 /* Assets.xcassets in Resources */,
 				C1E498372590703B00840AD7 /* Main.storyboard in Resources */,
 			);
@@ -415,6 +410,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C1E498342590703B00840AD7 /* ViewController.swift in Sources */,
+				C12EB03F25932F0C00F1E905 /* MemoDetailViewController.swift in Sources */,
 				C1E498302590703B00840AD7 /* AppDelegate.swift in Sources */,
 				C1E498322590703B00840AD7 /* SceneDelegate.swift in Sources */,
 			);
