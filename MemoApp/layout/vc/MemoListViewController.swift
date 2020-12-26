@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class MemoListViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate{ //,
+class MemoListViewController: UIViewController{ //, UICollectionViewDataSource, UICollectionViewDelegate
     
     private lazy var guide:ConstraintLayoutGuideDSL = {
         return self.view.safeAreaLayoutGuide.snp
@@ -55,9 +55,9 @@ class MemoListViewController: UIViewController, UICollectionViewDataSource, UICo
     private func setUI(){
         self.view.backgroundColor = .white
         
-        collectionView.register(MemoViewCell.self, forCellWithReuseIdentifier:"RowCell")
-        collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.register(MemoViewCell.self, forCellWithReuseIdentifier:"RowCell")
         self.view.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
             make.trailing.equalTo(guide.trailing)
@@ -90,10 +90,20 @@ class MemoListViewController: UIViewController, UICollectionViewDataSource, UICo
     }
     
     
+
+}
+
+
+extension MemoListViewController : UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 2
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //이미지 카운터 하는 함수
         print("1")
-        return 100
+        return 5
         
     }
     
@@ -138,8 +148,4 @@ class MemoListViewController: UIViewController, UICollectionViewDataSource, UICo
         return 1
         
     }
-    
-    
-
 }
-
