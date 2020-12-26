@@ -18,8 +18,10 @@ class MemoViewCell: UICollectionViewCell {
         background.snp.makeConstraints{ make in
             make.top.equalTo(0)
             make.bottom.equalTo(0)
-            make.leading.equalTo(0)
-            make.trailing.equalTo(0)
+            make.width.equalTo(200)
+            make.height.equalTo(200)
+//            make.leading.equalTo(0)
+//            make.trailing.equalTo(0)
         }
         
         titleTV.textContainer.maximumNumberOfLines = 2
@@ -43,10 +45,10 @@ class MemoViewCell: UICollectionViewCell {
             make.trailing.equalTo(4)
         }
         
+        self.contentView.addSubview(background)
         background.addSubview(titleTV)
         background.addSubview(editDateTV)
         background.addSubview(infoTV)
-        self.contentView.addSubview(background)
 
     }
     
