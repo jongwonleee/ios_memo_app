@@ -23,12 +23,24 @@ class MemoDetailViewController: UIViewController {
         }
     }
     
+    private lazy var scrollView:UIScrollView = {
+        let sv:UIScrollView = UIScrollView()
+        sv.backgroundColor = .systemRed
+        return sv
+    }()
+    
     override func viewDidLoad() {
         self.view.backgroundColor = .white
         var toolbarItems = [UIBarButtonItem]()
         toolbarItems.append(UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(onButtonEditClicked(_:))))
         self.navigationController?.isToolbarHidden = true
         self.navigationItem.setRightBarButtonItems(toolbarItems, animated: true)
+        
+        setUI()
+    }
+    
+    private func setUI(){
+        //self.view.
     }
     
     @objc

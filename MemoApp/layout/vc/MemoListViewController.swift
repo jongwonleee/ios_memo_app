@@ -10,9 +10,9 @@ import SnapKit
 
 class MemoListViewController: UIViewController{ //, UICollectionViewDataSource, UICollectionViewDelegate
     
-    private lazy var guide:ConstraintLayoutGuideDSL = {
-        return self.view.safeAreaLayoutGuide.snp
-    }()
+//    private lazy var guide:ConstraintLayoutGuideDSL = {
+//        return self.view.safeAreaLayoutGuide.snp
+//    }()
     
     private lazy var actionSheetSort:UIAlertController = {
         let action:UIAlertController = UIAlertController(title: "정렬 방식", message: "선택한 방식으로 메모들이 정렬됩니다.", preferredStyle: .actionSheet)
@@ -154,5 +154,18 @@ extension MemoListViewController : UICollectionViewDataSource, UICollectionViewD
         vc.memoId = sender.tag
         self.navigationController?.pushViewController(vc, animated: true)
 
+    }
+}
+
+
+extension UIViewController {
+//    private func guide() -> ConstraintLayoutGuideDSL {
+//        return self.view.safeAreaLayoutGuide.snp
+//    }
+    
+    var guide:ConstraintLayoutGuideDSL {
+        get {
+            self.view.safeAreaLayoutGuide.snp
+        }
     }
 }

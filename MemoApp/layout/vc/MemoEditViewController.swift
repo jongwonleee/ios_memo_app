@@ -26,9 +26,9 @@ class MemoEditViewController: UIViewController {
         }
     }
     
-    private lazy var guide:ConstraintLayoutGuideDSL = {
-        return self.view.safeAreaLayoutGuide.snp
-    }()
+//    private lazy var guide:ConstraintLayoutGuideDSL = {
+//        return self.view.safeAreaLayoutGuide.snp
+//    }()
     
     private lazy var textView:UITextView = {
         let textView:UITextView = UITextView()
