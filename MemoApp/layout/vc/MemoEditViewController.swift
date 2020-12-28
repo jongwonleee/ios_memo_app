@@ -10,9 +10,9 @@ import SnapKit
 
 class MemoEditViewController: UIViewController {
     
-    public var editNo:Int
+    public var memoId:Int
     {
-        get{self.editNo}
+        get{self.memoId}
         
         //TODO 나중에 숫자가 아니라 dao로 변경하기
         set(newVal){

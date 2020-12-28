@@ -33,28 +33,22 @@ class MemoListViewController: UIViewController{ //, UICollectionViewDataSource, 
     
     
     private lazy var collectionView:UICollectionView = {
-        let collectionView:UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout.init())
+        let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        let collectionView:UICollectionView = UICollectionView(frame: self.view.bounds, collectionViewLayout: layout)
         collectionView.backgroundColor = .systemBlue
         return collectionView
     }()
-    
+        
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "List"
-        
-        var toolbarItems = [UIBarButtonItem]()
-        toolbarItems.append(UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(onButtonAddClicked)))
-        self.navigationController?.isToolbarHidden = true
-        self.navigationItem.setRightBarButtonItems(toolbarItems, animated: true)
-        
-        
         setUI()
     }
     
     private func setUI(){
         self.view.backgroundColor = .white
-        
+
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(MemoViewCell.self, forCellWithReuseIdentifier:"RowCell")
@@ -85,7 +79,7 @@ class MemoListViewController: UIViewController{ //, UICollectionViewDataSource, 
     @objc
     private func onButtonAddClicked(_ sender:UIButton) {
         let vc:MemoEditViewController = MemoEditViewController()
-        vc.editNo = -1
+        vc.memoId = -1
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -102,18 +96,21 @@ extension MemoListViewController : UICollectionViewDataSource, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //이미지 카운터 하는 함수
-        print("1")
-        return 5
+        return 100
         
     }
     
     
     //셀 구성하기
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        print("12")
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RowCell", for: indexPath) as! MemoViewCell
-        cell.titleTV.text = "!"
-        cell.background.backgroundColor = .red
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RowCell", for: indexPath) as? MemoViewCell else {
+            return collectionView.dequeueReusableCell(withReuseIdentifier: "RowCell", for: indexPath)
+        }
+
+        cell.background.backgroundColor = .white
+        cell.background.tag = indexPath.row
+        cell.background.addTarget(self, action: #selector(onCellClicked(_:)), for: .touchUpInside)
+        cell.titleTV.text = "\(indexPath.row)"
         return cell
         
     }
@@ -123,8 +120,6 @@ extension MemoListViewController : UICollectionViewDataSource, UICollectionViewD
     
     // 사이즈
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        print("2")
-
         let collectionViewCellWithd = collectionView.frame.width / 2 - 1
         
         return CGSize(width: collectionViewCellWithd, height: collectionViewCellWithd)
@@ -135,7 +130,6 @@ extension MemoListViewController : UICollectionViewDataSource, UICollectionViewD
     
     //위아래 라인 간격
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        print("3")
 
         return 1
         
@@ -143,9 +137,15 @@ extension MemoListViewController : UICollectionViewDataSource, UICollectionViewD
     
     //옆 라인 간격
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        print("4")
-
         return 1
         
+    }
+    
+    @objc
+    func onCellClicked(_ sender:UIButton) {
+        let vc:MemoDetailViewController = MemoDetailViewController()
+        vc.memoId = sender.tag
+        self.navigationController?.pushViewController(vc, animated: true)
+
     }
 }
