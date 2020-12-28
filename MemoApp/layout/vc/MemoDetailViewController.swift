@@ -40,7 +40,13 @@ class MemoDetailViewController: UIViewController {
     }
     
     private func setUI(){
-        //self.view.
+        self.view.addSubview(scrollView)
+        scrollView.snp.makeConstraints{ make in
+            make.top.equalTo(guide.top)
+            make.bottom.equalTo(0)
+            make.leading.equalTo(guide.leading)
+            make.trailing.equalTo(guide.trailing)
+        }
     }
     
     @objc

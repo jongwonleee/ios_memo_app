@@ -10,10 +10,6 @@ import SnapKit
 
 class MemoListViewController: UIViewController{ //, UICollectionViewDataSource, UICollectionViewDelegate
     
-//    private lazy var guide:ConstraintLayoutGuideDSL = {
-//        return self.view.safeAreaLayoutGuide.snp
-//    }()
-    
     private lazy var actionSheetSort:UIAlertController = {
         let action:UIAlertController = UIAlertController(title: "정렬 방식", message: "선택한 방식으로 메모들이 정렬됩니다.", preferredStyle: .actionSheet)
         action.addAction(UIAlertAction(title: "제목", style: .default, handler: nil))
