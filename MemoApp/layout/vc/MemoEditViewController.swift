@@ -21,7 +21,7 @@ class MemoEditViewController: UIViewController {
                 navigationItem.title = "새로운 메모"
             }else
             {
-                navigationItem.title = "\(newVal)"
+                navigationItem.title = "\(newVal) 수정"
             }
         }
     }

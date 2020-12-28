@@ -43,6 +43,13 @@ class MemoListViewController: UIViewController{ //, UICollectionViewDataSource, 
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "List"
+        
+        var toolbarItems = [UIBarButtonItem]()
+    
+        toolbarItems.append(UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(onButtonAddClicked(_:))))
+        self.navigationController?.isToolbarHidden = true
+        self.navigationItem.setRightBarButtonItems(toolbarItems, animated: true)
+        
         setUI()
     }
     
