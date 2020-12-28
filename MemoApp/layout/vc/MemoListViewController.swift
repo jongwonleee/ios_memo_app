@@ -113,7 +113,7 @@ extension MemoListViewController : UICollectionViewDataSource, UICollectionViewD
         cell.background.backgroundColor = .white
         cell.background.tag = indexPath.row
         cell.background.addTarget(self, action: #selector(onCellClicked(_:)), for: .touchUpInside)
-        cell.titleTV.text = "\(indexPath.row)"
+        cell.titleLabel.text = "\(indexPath.row)\nhihi\nbyby"
         return cell
         
     }
