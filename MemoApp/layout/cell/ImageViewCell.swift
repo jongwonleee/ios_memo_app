@@ -19,17 +19,17 @@ class ImageViewCell: UICollectionViewCell {
         imageView.backgroundColor = .systemBlue
         imageView.snp.makeConstraints{ make in
             make.top.equalTo(8)
-            make.bottom.equalTo(8)
-            make.trailing.equalTo(8)
+            make.bottom.equalTo(-8)
+            make.trailing.equalTo(-8)
             make.leading.equalTo(8)
         }
         
         eraseButton.backgroundColor = .systemPink
         eraseButton.snp.makeConstraints{make in
             make.top.equalTo(2)
-            make.trailing.equalTo(2)
-            make.width.equalTo(12)
-            make.height.equalTo(12)
+            make.trailing.equalTo(-2)
+            make.width.equalTo(20)
+            make.height.equalTo(20)
         }
     }
     

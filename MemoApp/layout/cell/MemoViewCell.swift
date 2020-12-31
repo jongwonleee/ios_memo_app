@@ -34,7 +34,7 @@ class MemoViewCell: UICollectionViewCell {
         titleLabel.snp.makeConstraints{ make in
             make.top.equalTo(4)
             make.leading.equalTo(4)
-            make.trailing.equalTo(4)
+            make.trailing.equalTo(-4)
             make.height.lessThanOrEqualTo(40)
         }
         
@@ -42,7 +42,7 @@ class MemoViewCell: UICollectionViewCell {
         editDateLabel.textColor = .gray
         editDateLabel.snp.makeConstraints{make in
             make.top.equalTo(titleLabel.snp.bottom).offset(4)
-            make.trailing.equalTo(4)
+            make.trailing.equalTo(-4)
             make.leading.equalTo(4)
             make.height.lessThanOrEqualTo(20)
         }
@@ -52,9 +52,9 @@ class MemoViewCell: UICollectionViewCell {
         infoLabel.lineBreakMode = .byTruncatingTail
         infoLabel.snp.makeConstraints{ make in
             make.top.equalTo(editDateLabel.snp.bottom).offset(4)
-            make.bottom.equalTo(4)
+            make.bottom.equalTo(-4)
             make.leading.equalTo(4)
-            make.trailing.equalTo(4)
+            make.trailing.equalTo(-4)
         }
         
         

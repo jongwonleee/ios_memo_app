@@ -10,12 +10,14 @@ import SnapKit
 
 class MemoEditViewController: UIViewController {
     
+    private var id:Int = -1
     public var memoId:Int
     {
-        get{self.memoId}
+        get{id}
         
         //TODO 나중에 숫자가 아니라 dao로 변경하기
         set(newVal){
+            id = newVal
             if(newVal == -1)
             {
                 navigationItem.title = "새로운 메모"
@@ -40,10 +42,13 @@ class MemoEditViewController: UIViewController {
     }()
     
     private lazy var collectionView:UICollectionView = {
-        let collectionView:UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
-        collectionView.backgroundColor = UIColor(white: 0.3, alpha: 1)
-        collectionView.isOpaque = false
-        collectionView.alpha = 0.5
+        let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let collectionView:UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+//        collectionView.backgroundColor = UIColor(white: 0.3, alpha: 1)
+//        collectionView.isOpaque = false
+//        collectionView.alpha = 0.5
+        collectionView.backgroundColor = .systemGray
         return collectionView
     }()
     
@@ -72,12 +77,16 @@ class MemoEditViewController: UIViewController {
         }
         
         self.view.addSubview(collectionView)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.register(ImageViewCell.self, forCellWithReuseIdentifier:"RowCell")
         collectionView.snp.makeConstraints { make in
-            make.bottom.equalTo(0)
+            make.bottom.equalTo(guide.bottomMargin)
             make.leading.equalTo(guide.leading)
             make.trailing.equalTo(guide.trailing)
             make.height.equalTo(100)
         }
+        
     }
     
     
@@ -87,3 +96,53 @@ class MemoEditViewController: UIViewController {
     }
 
 }
+
+
+extension MemoEditViewController : UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+    
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        //이미지 카운터 하는 함수
+        return 10
+        
+    }
+    
+    
+    //셀 구성하기
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RowCell", for: indexPath) as? ImageViewCell else {
+            return collectionView.dequeueReusableCell(withReuseIdentifier: "RowCell", for: indexPath)
+        }
+
+        return cell
+        
+    }
+    
+    
+    
+    
+    // 사이즈
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let collectionViewCellHeight = collectionView.frame.height
+        
+        return CGSize(width: collectionViewCellHeight, height: collectionViewCellHeight)
+        
+    }
+    
+    
+    
+    //위아래 라인 간격
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+
+        return 1
+        
+    }
+    
+    //옆 라인 간격
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 8
+        
+    }
+
+}
+
