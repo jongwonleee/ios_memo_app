@@ -13,9 +13,20 @@ class MemoListViewController: UIViewController{ //, UICollectionViewDataSource, 
     
     private lazy var actionSheetSort:UIAlertController = {
         let action:UIAlertController = UIAlertController(title: "정렬 방식", message: "선택한 방식으로 메모들이 정렬됩니다.", preferredStyle: .actionSheet)
-        action.addAction(UIAlertAction(title: "제목", style: .default, handler: nil))
-        action.addAction(UIAlertAction(title: "생성일", style: .default, handler: nil))
-        action.addAction(UIAlertAction(title: "수정일", style: .default, handler: nil))
+        action.addAction(UIAlertAction(title: "제목", style: .default, handler: { (action) in
+            self.memoList.sort { $0.title > $1.title }
+            self.collectionView.reloadData()
+        }))
+        action.addAction(UIAlertAction(title: "생성일", style: .default, handler: { (action) in
+            self.memoList.sort { $0.createdDate > $1.createdDate }
+            self.collectionView.reloadData()
+
+        }))
+        action.addAction(UIAlertAction(title: "수정일", style: .default, handler: { (action) in
+            self.memoList.sort { $0.updatedDate > $1.updatedDate }
+            self.collectionView.reloadData()
+
+        }))
         action.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
         return action
     }()
@@ -63,6 +74,7 @@ class MemoListViewController: UIViewController{ //, UICollectionViewDataSource, 
         collectionView.delegate = self
         collectionView.register(MemoViewCell.self, forCellWithReuseIdentifier:"RowCell")
         self.view.addSubview(collectionView)
+        collectionView.backgroundColor = .white
         collectionView.snp.makeConstraints { make in
             make.trailing.equalTo(guide.trailing)
             make.leading.equalTo(guide.leading)
@@ -92,8 +104,7 @@ class MemoListViewController: UIViewController{ //, UICollectionViewDataSource, 
         vc.memoId = -1
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
-    
+
 
 }
 
@@ -101,7 +112,7 @@ class MemoListViewController: UIViewController{ //, UICollectionViewDataSource, 
 extension MemoListViewController : UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
