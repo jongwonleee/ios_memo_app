@@ -107,8 +107,8 @@
             filePath = "MemoApp/layout/vc/MemoDetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
             landmarkName = "MemoDetailViewController"
             landmarkType = "3">
          </BreakpointContent>
