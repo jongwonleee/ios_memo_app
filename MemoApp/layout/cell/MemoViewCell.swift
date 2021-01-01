@@ -9,9 +9,19 @@ import UIKit
 
 class MemoViewCell: UICollectionViewCell {
     public var background:UIButton = UIButton()
-    public var titleLabel:UILabel = UILabel()
-    public var editDateLabel:UILabel = UILabel()
-    public var infoLabel:UILabel = UILabel()
+    private var titleLabel:UILabel = UILabel()
+    private var editDateLabel:UILabel = UILabel()
+    private var infoLabel:UILabel = UILabel()
+    
+    public func setCellView(_ memo:MemoDao){
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        background.tag = memo.id
+        titleLabel.text = memo.title
+        editDateLabel.text = dateFormatter.string(from: memo.updatedDate)
+        infoLabel.text = memo.content
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -20,6 +30,7 @@ class MemoViewCell: UICollectionViewCell {
         background.addSubview(infoLabel)
         self.contentView.addSubview(background)
         
+        background.backgroundColor = .white
         background.snp.makeConstraints{ make in
             make.top.equalTo(0)
             make.bottom.equalTo(0)
@@ -28,7 +39,6 @@ class MemoViewCell: UICollectionViewCell {
         }
         
         titleLabel.numberOfLines = 2
-        titleLabel.text = "!!"
         titleLabel.lineBreakMode = .byTruncatingTail
         titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
         titleLabel.snp.makeConstraints{ make in
@@ -38,7 +48,6 @@ class MemoViewCell: UICollectionViewCell {
             make.height.lessThanOrEqualTo(40)
         }
         
-        editDateLabel.text = "2012-02-01"
         editDateLabel.textColor = .gray
         editDateLabel.snp.makeConstraints{make in
             make.top.equalTo(titleLabel.snp.bottom).offset(4)
@@ -48,7 +57,6 @@ class MemoViewCell: UICollectionViewCell {
         }
         
         infoLabel.numberOfLines = 2
-        infoLabel.text = "1112\n11111\n1222222"
         infoLabel.lineBreakMode = .byTruncatingTail
         infoLabel.snp.makeConstraints{ make in
             make.top.equalTo(editDateLabel.snp.bottom).offset(4)

@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import RealmSwift
 
 class MemoListViewController: UIViewController{ //, UICollectionViewDataSource, UICollectionViewDelegate
     
@@ -31,9 +32,13 @@ class MemoListViewController: UIViewController{ //, UICollectionViewDataSource, 
     private lazy var collectionView:UICollectionView = {
         let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         let collectionView:UICollectionView = UICollectionView(frame: self.view.bounds, collectionViewLayout: layout)
-        collectionView.backgroundColor = .systemBlue
         return collectionView
     }()
+    
+    private lazy var memoList:[MemoDao] = {
+        return realm.objects(MemoDao.self).sorted(byKeyPath: "updatedDate", ascending: false).toArray()
+    }()
+    
         
     
     override func viewDidLoad() {
@@ -46,10 +51,12 @@ class MemoListViewController: UIViewController{ //, UICollectionViewDataSource, 
         self.navigationController?.isToolbarHidden = true
         self.navigationItem.setRightBarButtonItems(toolbarItems, animated: true)
         
+        //print(Realm.Configuration.defaultConfiguration.fileURL!)
+
         setUI()
     }
     
-    private func setUI(){
+    private func setUI() {
         self.view.backgroundColor = .white
 
         collectionView.dataSource = self
@@ -99,7 +106,7 @@ extension MemoListViewController : UICollectionViewDataSource, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //이미지 카운터 하는 함수
-        return 100
+        return memoList.count
         
     }
     
@@ -110,10 +117,8 @@ extension MemoListViewController : UICollectionViewDataSource, UICollectionViewD
             return collectionView.dequeueReusableCell(withReuseIdentifier: "RowCell", for: indexPath)
         }
 
-        cell.background.backgroundColor = .white
-        cell.background.tag = indexPath.row
         cell.background.addTarget(self, action: #selector(onCellClicked(_:)), for: .touchUpInside)
-        cell.titleLabel.text = "\(indexPath.row)\nhihi\nbyby"
+        cell.setCellView(memoList[indexPath.row])
         return cell
         
     }
@@ -164,4 +169,19 @@ extension UIViewController {
             self.view.safeAreaLayoutGuide.snp
         }
     }
+    
+    var realm:Realm {
+        get {
+            try! Realm()
+        }
+    }
 }
+
+extension Results {
+    func toArray() -> [Element] {
+      return compactMap {
+        $0
+      }
+    }
+ }
+
