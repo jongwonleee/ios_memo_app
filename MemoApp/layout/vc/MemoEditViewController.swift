@@ -11,6 +11,7 @@ import SnapKit
 class MemoEditViewController: UIViewController {
     
     private var id:Int = -1
+    private var memo:MemoDao = MemoDao()
     public var memoId:Int
     {
         get{id}
@@ -23,21 +24,20 @@ class MemoEditViewController: UIViewController {
                 navigationItem.title = "새로운 메모"
             }else
             {
-                navigationItem.title = "\(newVal) 수정"
+                memo = realm.objects(MemoDao.self).filter("id = \(id)").first!
+                textView.text = "\(memo.title)\n\(memo.content ?? "")"
+                navigationItem.title = "\(memo.title) 수정"
             }
         }
     }
-    
-//    private lazy var guide:ConstraintLayoutGuideDSL = {
-//        return self.view.safeAreaLayoutGuide.snp
-//    }()
+
     
     private lazy var textView:UITextView = {
         let textView:UITextView = UITextView()
-        textView.backgroundColor = .green
+        textView.backgroundColor = .white
+        textView.font = UIFont.systemFont(ofSize: 20)
         textView.isScrollEnabled = true
         textView.isUserInteractionEnabled = true
-        textView.text="!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n!!!\n"
         return textView
     }()
     
@@ -87,11 +87,57 @@ class MemoEditViewController: UIViewController {
             make.height.equalTo(100)
         }
         
+        let view:UIView = UIView()
+        view.backgroundColor = collectionView.backgroundColor
+        self.view.addSubview(view)
+        view.snp.makeConstraints{ make in
+            make.top.equalTo(collectionView.snp.bottom)
+            make.leading.equalTo(0)
+            make.trailing.equalTo(0)
+            make.bottom.equalTo(0)
+        }
+        
     }
     
     
     @objc
     private func onDoneButtonClicked(_ sender:UIButton){
+        let enter = textView.text.firstIndex(of: "\n")
+        
+        if id == -1 {
+            memo.createdDate = memo.updatedDate
+            memo.id = newId
+            if enter == nil {
+                memo.title = textView.text.trimmingCharacters(in: .whitespacesAndNewlines)
+                memo.content = nil
+            }
+            else
+            {
+                memo.title = String(textView.text[...enter!])
+                memo.content = String(textView.text[enter!...])
+            }
+            memo.updatedDate = Date()
+            
+            try? realm.write({
+                realm.add(memo)
+            })
+        }else
+        {
+            try? realm.write({
+                if enter == nil {
+                    memo.title = textView.text.trimmingCharacters(in: .whitespacesAndNewlines)
+                    memo.content = nil
+                }
+                else
+                {
+                    memo.title = String(textView.text[...enter!])
+                    memo.content = String(textView.text[enter!...])
+                }
+                memo.updatedDate = Date()
+                
+                realm.add(memo, update: .modified)
+            })
+        }
         self.navigationController?.popViewController(animated: true)
     }
 

@@ -89,6 +89,8 @@ class MemoListViewController: UIViewController{ //, UICollectionViewDataSource, 
             make.width.equalTo(30)
             make.height.equalTo(30)
         }
+        
+        self.collectionView.reloadData()
     }
     
     @objc
@@ -176,14 +178,20 @@ extension UIViewController {
 //    }
     
     var guide:ConstraintLayoutGuideDSL {
-        get {
-            self.view.safeAreaLayoutGuide.snp
-        }
+        self.view.safeAreaLayoutGuide.snp
     }
     
     var realm:Realm {
-        get {
-            try! Realm()
+        try! Realm()
+    }
+    
+    var newId:Int {
+        if let ret = realm.objects(MemoDao.self).sorted(byKeyPath: "id").last?.id
+        {
+            return ret + 1
+        }else
+        {
+            return 0
         }
     }
 }

@@ -20,9 +20,7 @@ class MemoDetailViewController: UIViewController {
         //TODO 나중에 숫자가 아니라 dao로 변경하기
         set(newVal){
             id = newVal
-            memo = realm.objects(MemoDao.self).filter("id = \(id)").toArray()[0]
-            navigationItem.title = memo.title
-            textView.text = "\(memo.title)\n\(memo.content ?? "")"
+            updateData()
         }
     }
     
@@ -34,13 +32,13 @@ class MemoDetailViewController: UIViewController {
         return sv
     }()
     
-    private let textView:UILabel = {
-        let tv:UILabel = UILabel()
-        tv.font = tv.font.withSize(20)
-        tv.numberOfLines = 0
-        tv.lineBreakMode = .byWordWrapping
-        tv.translatesAutoresizingMaskIntoConstraints = false
-        return tv
+    private let contentLabel:UILabel = {
+        let label:UILabel = UILabel()
+        label.font = label.font.withSize(20)
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     private let scrollViewContent:UIStackView = {
@@ -67,7 +65,7 @@ class MemoDetailViewController: UIViewController {
         
         self.view.addSubview(scrollView)
         scrollView.addSubview(scrollViewContent)
-        scrollViewContent.addArrangedSubview(textView)
+        scrollViewContent.addArrangedSubview(contentLabel)
 
         scrollView.snp.makeConstraints{ make in
             make.top.equalTo(guide.top)
@@ -82,13 +80,18 @@ class MemoDetailViewController: UIViewController {
         }
         
         
-        textView.snp.makeConstraints { make in
+        contentLabel.snp.makeConstraints { make in
             make.top.equalTo(8)
             make.leading.equalTo(8)
             make.trailing.equalTo(8)
             make.height.greaterThanOrEqualTo(0)
         }
         
+        print(id)
+        if id != -1 {
+            print("!")
+            updateData()
+        }
         //scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: 2000)
     }
     
@@ -97,6 +100,12 @@ class MemoDetailViewController: UIViewController {
         let vc:MemoEditViewController = MemoEditViewController()
         vc.memoId = id
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    private func updateData(){
+        memo = realm.objects(MemoDao.self).filter("id = \(id)").first!
+        navigationItem.title = memo.title
+        contentLabel.text = "\(memo.title)\n\(memo.content ?? "")"
     }
 
 }
