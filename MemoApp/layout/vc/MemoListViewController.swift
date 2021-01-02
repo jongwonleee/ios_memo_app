@@ -68,6 +68,7 @@ class MemoListViewController: UIViewController{ //, UICollectionViewDataSource, 
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        memoList =  realm.objects(MemoDao.self).sorted(byKeyPath: "updatedDate", ascending: false).toArray()
         self.collectionView.reloadData()
     }
     
