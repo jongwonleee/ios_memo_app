@@ -60,6 +60,14 @@ class MemoDetailViewController: UIViewController {
         setUI()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        if id != -1 {
+            print("!")
+            updateData()
+        }
+    }
+   
+    
     private func setUI(){
         
         
@@ -86,12 +94,7 @@ class MemoDetailViewController: UIViewController {
             make.trailing.equalTo(8)
             make.height.greaterThanOrEqualTo(0)
         }
-        
-        print(id)
-        if id != -1 {
-            print("!")
-            updateData()
-        }
+                
         //scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: 2000)
     }
     

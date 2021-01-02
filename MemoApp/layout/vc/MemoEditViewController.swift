@@ -108,13 +108,13 @@ class MemoEditViewController: UIViewController {
             memo.createdDate = memo.updatedDate
             memo.id = newId
             if enter == nil {
-                memo.title = textView.text.trimmingCharacters(in: .whitespacesAndNewlines)
+                memo.title = String(textView.text.trimmingCharacters(in: .whitespacesAndNewlines))
                 memo.content = nil
             }
             else
             {
-                memo.title = String(textView.text[...enter!])
-                memo.content = String(textView.text[enter!...])
+                memo.title = String(textView.text[...enter!].trimmingCharacters(in: .whitespacesAndNewlines))
+                memo.content = String(textView.text[enter!...].trimmingCharacters(in: .whitespacesAndNewlines))
             }
             memo.updatedDate = Date()
             
@@ -125,13 +125,13 @@ class MemoEditViewController: UIViewController {
         {
             try? realm.write({
                 if enter == nil {
-                    memo.title = textView.text.trimmingCharacters(in: .whitespacesAndNewlines)
+                    memo.title = String(textView.text.trimmingCharacters(in: .whitespacesAndNewlines))
                     memo.content = nil
                 }
                 else
                 {
-                    memo.title = String(textView.text[...enter!])
-                    memo.content = String(textView.text[enter!...])
+                    memo.title = String(textView.text[...enter!].trimmingCharacters(in: .whitespacesAndNewlines))
+                    memo.content = String(textView.text[enter!...].trimmingCharacters(in: .whitespacesAndNewlines))
                 }
                 memo.updatedDate = Date()
                 

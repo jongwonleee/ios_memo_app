@@ -67,6 +67,10 @@ class MemoListViewController: UIViewController{ //, UICollectionViewDataSource, 
         setUI()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.collectionView.reloadData()
+    }
+    
     private func setUI() {
         self.view.backgroundColor = .white
 
@@ -90,7 +94,6 @@ class MemoListViewController: UIViewController{ //, UICollectionViewDataSource, 
             make.height.equalTo(30)
         }
         
-        self.collectionView.reloadData()
     }
     
     @objc
