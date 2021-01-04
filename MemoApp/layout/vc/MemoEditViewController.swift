@@ -12,6 +12,7 @@ class MemoEditViewController: UIViewController {
     
     private var id:Int = -1
     private var memo:MemoDao = MemoDao()
+    private var images:[UIImage] = [UIImage]()
     public var memoId:Int
     {
         get{id}
@@ -178,6 +179,17 @@ class MemoEditViewController: UIViewController {
 }
 
 extension MemoEditViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
+            if !images.contains(image) {
+                images.append(image)
+                
+                collectionView.reloadData()
+            }
+        }
+        dismiss(animated: true, completion: nil)
+    }
 }
 
 
@@ -186,7 +198,7 @@ extension MemoEditViewController : UICollectionViewDataSource, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //이미지 카운터 하는 함수
-        return 10
+        return images.count
         
     }
     
@@ -196,7 +208,8 @@ extension MemoEditViewController : UICollectionViewDataSource, UICollectionViewD
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RowCell", for: indexPath) as? ImageViewCell else {
             return collectionView.dequeueReusableCell(withReuseIdentifier: "RowCell", for: indexPath)
         }
-
+        
+        cell.imageView.image = images[indexPath.row]
         return cell
         
     }
