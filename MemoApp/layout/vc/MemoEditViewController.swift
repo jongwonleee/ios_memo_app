@@ -30,6 +30,33 @@ class MemoEditViewController: UIViewController {
             }
         }
     }
+    
+    private let picker = UIImagePickerController()
+    
+    private lazy var actionSheet:UIAlertController = {
+        let action:UIAlertController = UIAlertController(title: "이미지 불러오기", message: "이미지를 불러올 방법을 선택하세요", preferredStyle: .actionSheet)
+        action.addAction(UIAlertAction(title: "앨범", style: .default, handler: { (action) in
+            if (UIImagePickerController.isSourceTypeAvailable(.photoLibrary)){
+                self.picker.sourceType = .photoLibrary
+                self.present(self.picker, animated: false, completion: nil)
+            } else
+            {
+                print("photo library not available")
+            }
+            
+        }))
+        action.addAction(UIAlertAction(title: "카메라", style: .default, handler: { (action) in
+            if (UIImagePickerController.isSourceTypeAvailable(.camera)){
+                self.picker.sourceType = .camera
+                self.present(self.picker, animated: false, completion: nil)
+            } else
+            {
+                print("camera not available")
+            }
+        }))
+        action.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
+        return action
+    }()
 
     
     private lazy var textView:UITextView = {
@@ -45,9 +72,6 @@ class MemoEditViewController: UIViewController {
         let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let collectionView:UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-//        collectionView.backgroundColor = UIColor(white: 0.3, alpha: 1)
-//        collectionView.isOpaque = false
-//        collectionView.alpha = 0.5
         collectionView.backgroundColor = .systemGray
         return collectionView
     }()
@@ -56,18 +80,21 @@ class MemoEditViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
         
         var toolbarItems = [UIBarButtonItem]()
         toolbarItems.append(UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(onDoneButtonClicked(_:))))
-        toolbarItems.append(UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: nil))
+        toolbarItems.append(UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(onImageButtonClicked(_:))))
         self.navigationController?.isToolbarHidden = true
         self.navigationItem.setRightBarButtonItems(toolbarItems, animated: true)
+        
+        picker.delegate = self
         
         setUI()
     }
     
     private func setUI(){
+        self.view.backgroundColor = .white
+
         self.view.addSubview(textView)
         textView.snp.makeConstraints { make in
             make.leading.equalTo(guide.leading)
@@ -99,12 +126,19 @@ class MemoEditViewController: UIViewController {
         
     }
     
+    @objc
+    private func onImageButtonClicked(_ sender:UIButton){
+        if (!actionSheet.isBeingPresented){
+            present(actionSheet, animated: true, completion: nil)
+        }
+    }
+    
     
     @objc
     private func onDoneButtonClicked(_ sender:UIButton){
         let enter = textView.text.firstIndex(of: "\n")
         
-        if id == -1 {
+        if (id == -1) {
             memo.createdDate = memo.updatedDate
             memo.id = newId
             if enter == nil {
@@ -141,6 +175,9 @@ class MemoEditViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
 
+}
+
+extension MemoEditViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 }
 
 
