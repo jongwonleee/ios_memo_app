@@ -198,6 +198,13 @@ extension UIViewController {
             return 0
         }
     }
+    
+    func showAlert(_ title:String, _ message:String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+    }
 }
 
 extension Results {

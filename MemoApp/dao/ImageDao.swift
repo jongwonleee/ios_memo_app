@@ -12,4 +12,8 @@ class ImageDao: Object {
     @objc dynamic var memoId:Int = 0
     @objc dynamic var no:Int = 0
     @objc dynamic var data:Data = Data()
+    @objc dynamic var url:String = ""
+    var image:UIImage? {
+        return UIImage(data: self.data)
+    }
 }

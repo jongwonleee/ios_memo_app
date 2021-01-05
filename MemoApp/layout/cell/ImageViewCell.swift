@@ -26,13 +26,13 @@ class ImageViewCell: UICollectionViewCell {
             make.leading.equalTo(8)
         }
         
-        eraseButton.backgroundColor = .systemPink
-        eraseButton.snp.makeConstraints{make in
-            make.top.equalTo(2)
-            make.trailing.equalTo(-2)
-            make.width.equalTo(20)
-            make.height.equalTo(20)
-        }
+//        eraseButton.backgroundColor = .systemPink
+//        eraseButton.snp.makeConstraints{make in
+//            make.top.equalTo(2)
+//            make.trailing.equalTo(-2)
+//            make.width.equalTo(20)
+//            make.height.equalTo(20)
+//        }
     }
     
     required init?(coder: NSCoder) {

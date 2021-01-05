@@ -12,7 +12,12 @@ class MemoEditViewController: UIViewController {
     
     private var id:Int = -1
     private var memo:MemoDao = MemoDao()
-    private var images:[UIImage] = [UIImage]()
+    private lazy var memoList:[MemoDao] = {
+        return realm.objects(MemoDao.self).sorted(byKeyPath: "updatedDate", ascending: false).toArray()
+    }()
+    private lazy var images:[ImageDao] = {
+        return realm.objects(ImageDao.self).filter("memoId = \(id)").sorted(byKeyPath: "no").toArray()
+    }()
     public var memoId:Int
     {
         get{id}
@@ -160,6 +165,21 @@ class MemoEditViewController: UIViewController {
                 realm.add(memo, update: .modified)
             })
         }
+        
+        for i in 0 ... images.count-1{
+            images[i].memoId = memo.id
+            images[i].no = i
+        }
+        
+        if let old = realm.objects(ImageDao.self).filter("memoId = \(id)").first {
+            try! realm.write{
+                realm.delete(old)
+            }
+        }
+        
+        try? realm.write({
+            realm.add(images)
+        })
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -183,11 +203,31 @@ extension MemoEditViewController : UIImagePickerControllerDelegate, UINavigation
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
-            if !images.contains(image) {
-                images.append(image)
-                
+            if let url = (info[UIImagePickerController.InfoKey.imageURL] as? NSURL)?.absoluteString{
+                for i in images{
+                    if ( i.url == url){
+                        let alert = UIAlertController(title: "이미지 중복", message: "이미 이미지가 추가되었습니다", preferredStyle: UIAlertController.Style.alert)
+                        let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+                        alert.addAction(okAction)
+                        present(alert, animated: true, completion: nil)
+                        return
+                    }
+                }
+                let imageDao = ImageDao()
+                imageDao.url = url
+                if(image.pngData() == nil){
+                    imageDao.data = image.jpegData(compressionQuality: 1.0)!
+                }else{
+                    imageDao.data = image.pngData()!
+                }
+                images.append(imageDao)
                 collectionView.reloadData()
             }
+//            if !images.contains(image) {
+//                images.append(image)
+//
+//                collectionView.reloadData()
+//            }
         }
         dismiss(animated: true, completion: nil)
     }
@@ -210,7 +250,7 @@ extension MemoEditViewController : UICollectionViewDataSource, UICollectionViewD
             return collectionView.dequeueReusableCell(withReuseIdentifier: "RowCell", for: indexPath)
         }
         
-        cell.imageView.image = images[indexPath.row]
+        cell.imageView.image = images[indexPath.row].image
         return cell
         
     }
