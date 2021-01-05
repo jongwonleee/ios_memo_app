@@ -14,9 +14,11 @@ class ImageViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.contentView.addSubview(imageView)
-        self.contentView.addSubview(eraseButton)
+        //self.contentView.addSubview(eraseButton)
         
         imageView.backgroundColor = .systemBlue
+        imageView.layer.cornerRadius = 20.0
+        imageView.layer.masksToBounds = true
         imageView.snp.makeConstraints{ make in
             make.top.equalTo(8)
             make.bottom.equalTo(-8)

@@ -73,7 +73,7 @@ class MemoEditViewController: UIViewController {
         let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let collectionView:UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .systemGray
+        collectionView.backgroundColor = UIColor(white: 1, alpha: 0.5)
         return collectionView
     }()
     
@@ -137,21 +137,18 @@ class MemoEditViewController: UIViewController {
     
     @objc
     private func onDoneButtonClicked(_ sender:UIButton){
-        let enter = textView.text.firstIndex(of: "\n")
+        print(textView.text.count)
+        if (textView.text.count > 10000){
+            let alert = UIAlertController(title: "메모의 크기가 너무 큽니다", message: "메모가 10000자가 넘어가 저장할 수 없습니다", preferredStyle: UIAlertController.Style.alert)
+            let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+            alert.addAction(okAction)
+            present(alert, animated: true, completion: nil)
+        }
         
         if (id == -1) {
             memo.createdDate = memo.updatedDate
             memo.id = newId
-            if enter == nil {
-                memo.title = String(textView.text.trimmingCharacters(in: .whitespacesAndNewlines))
-                memo.content = nil
-            }
-            else
-            {
-                memo.title = String(textView.text[...enter!].trimmingCharacters(in: .whitespacesAndNewlines))
-                memo.content = String(textView.text[enter!...].trimmingCharacters(in: .whitespacesAndNewlines))
-            }
-            memo.updatedDate = Date()
+            setMemo()
             
             try? realm.write({
                 realm.add(memo)
@@ -159,21 +156,25 @@ class MemoEditViewController: UIViewController {
         }else
         {
             try? realm.write({
-                if enter == nil {
-                    memo.title = String(textView.text.trimmingCharacters(in: .whitespacesAndNewlines))
-                    memo.content = nil
-                }
-                else
-                {
-                    memo.title = String(textView.text[...enter!].trimmingCharacters(in: .whitespacesAndNewlines))
-                    memo.content = String(textView.text[enter!...].trimmingCharacters(in: .whitespacesAndNewlines))
-                }
-                memo.updatedDate = Date()
-                
+                setMemo()
                 realm.add(memo, update: .modified)
             })
         }
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    private func setMemo(){
+        let enter = textView.text.firstIndex(of: "\n")
+        if enter == nil {
+            memo.title = String(textView.text.trimmingCharacters(in: .whitespacesAndNewlines))
+            memo.content = nil
+        }
+        else
+        {
+            memo.title = String(textView.text[...enter!].trimmingCharacters(in: .whitespacesAndNewlines))
+            memo.content = String(textView.text[enter!...].trimmingCharacters(in: .whitespacesAndNewlines))
+        }
+        memo.updatedDate = Date()
     }
 
 }
