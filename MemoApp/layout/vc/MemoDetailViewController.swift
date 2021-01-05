@@ -23,6 +23,9 @@ class MemoDetailViewController: UIViewController {
             updateData()
         }
     }
+    private lazy var images:[ImageDao] = {
+        return realm.objects(ImageDao.self).filter("memoId = \(id)").sorted(byKeyPath: "no").toArray()
+    }()
     
     private let scrollView:UIScrollView = {
         let sv:UIScrollView = UIScrollView()
@@ -73,7 +76,22 @@ class MemoDetailViewController: UIViewController {
         
         self.view.addSubview(scrollView)
         scrollView.addSubview(scrollViewContent)
+        
+        for i in images{
+            let imageView = UIImageView()
+            imageView.image = i.image
+            scrollViewContent.addArrangedSubview(imageView)
+
+            imageView.snp.makeConstraints{ make in
+                make.top.equalTo(8)
+                make.leading.equalTo(8)
+                make.trailing.equalTo(8)
+                make.height.greaterThanOrEqualTo(0)
+            }
+        }
+        
         scrollViewContent.addArrangedSubview(contentLabel)
+
 
         scrollView.snp.makeConstraints{ make in
             make.top.equalTo(guide.top)

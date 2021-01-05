@@ -166,10 +166,18 @@ class MemoEditViewController: UIViewController {
             })
         }
         
+        var new:[ImageDao] = [ImageDao]()
         for i in 0 ... images.count-1{
-            images[i].memoId = memo.id
-            images[i].no = i
+            let tmp = ImageDao()
+            tmp.data = (images[i].image?.pngData())!
+            tmp.url = images[i].url
+            tmp.memoId = memo.id
+            tmp.no = i
+            new.append(tmp)
         }
+
+        
+
         
         if let old = realm.objects(ImageDao.self).filter("memoId = \(id)").first {
             try! realm.write{
@@ -177,8 +185,9 @@ class MemoEditViewController: UIViewController {
             }
         }
         
+        print(new)
         try? realm.write({
-            realm.add(images)
+            realm.add(new)
         })
         self.navigationController?.popViewController(animated: true)
     }
