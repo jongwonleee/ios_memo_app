@@ -64,7 +64,7 @@ class MemoViewCell: UICollectionViewCell {
         stackView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(16)
             make.leading.equalToSuperview().offset(16)
-            make.bottom.lessThanOrEqualToSuperview().offset(16)
+            make.bottom.lessThanOrEqualToSuperview().offset(-16)
             make.trailing.equalToSuperview().offset(-16)
         }
         
@@ -75,7 +75,8 @@ class MemoViewCell: UICollectionViewCell {
             make.height.lessThanOrEqualTo(40)
         }
         
-        editDateLabel.textColor = .gray
+        editDateLabel.textColor = .white
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
         editDateLabel.snp.makeConstraints{make in
             make.height.lessThanOrEqualTo(20)
         }
@@ -92,7 +93,7 @@ class MemoViewCell: UICollectionViewCell {
             make.top.equalToSuperview()
             make.trailing.equalToSuperview()
             make.leading.equalToSuperview()
-            make.height.equalTo(stackView).offset(16)
+            make.bottom.equalTo(stackView).offset(16)
         }
         
         
