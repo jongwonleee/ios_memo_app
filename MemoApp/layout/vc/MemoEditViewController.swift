@@ -176,17 +176,11 @@ class MemoEditViewController: UIViewController {
             new.append(tmp)
         }
 
+        let old = realm.objects(ImageDao.self).filter("memoId = \(id)")
         
-
-        
-        if let old = realm.objects(ImageDao.self).filter("memoId = \(id)").first {
-            try! realm.write{
-                realm.delete(old)
-            }
-        }
-        
-        print(new)
+       // print(new)
         try? realm.write({
+            realm.delete(old)
             realm.add(new)
         })
         self.navigationController?.popViewController(animated: true)

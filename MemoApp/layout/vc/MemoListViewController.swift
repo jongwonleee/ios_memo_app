@@ -62,7 +62,7 @@ class MemoListViewController: UIViewController{ //, UICollectionViewDataSource, 
         self.navigationController?.isToolbarHidden = true
         self.navigationItem.setRightBarButtonItems(toolbarItems, animated: true)
         
-        //print(Realm.Configuration.defaultConfiguration.fileURL!)
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
 
         setUI()
     }
