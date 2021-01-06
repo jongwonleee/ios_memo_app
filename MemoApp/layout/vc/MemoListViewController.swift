@@ -133,9 +133,9 @@ extension MemoListViewController : UICollectionViewDataSource, UICollectionViewD
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RowCell", for: indexPath) as? MemoViewCell else {
             return collectionView.dequeueReusableCell(withReuseIdentifier: "RowCell", for: indexPath)
         }
-
         cell.background.addTarget(self, action: #selector(onCellClicked(_:)), for: .touchUpInside)
         cell.setCellView(memoList[indexPath.row])
+
         return cell
         
     }
