@@ -134,7 +134,7 @@ class MemoEditViewController: UIViewController {
     
     @objc
     private func onImageButtonClicked(_ sender:UIButton){
-        if (!actionSheet.isBeingPresented){
+        if (!actionSheet.isBeingPresented && images.count < 10){
             present(actionSheet, animated: true, completion: nil)
         }
     }
@@ -143,8 +143,15 @@ class MemoEditViewController: UIViewController {
     @objc
     private func onDoneButtonClicked(_ sender:UIButton){
         print(textView.text.count)
-        if (textView.text.count > 10000){
-            let alert = UIAlertController(title: "메모의 크기가 너무 큽니다", message: "메모가 10000자가 넘어가 저장할 수 없습니다", preferredStyle: UIAlertController.Style.alert)
+        if (textView.text.trimmingCharacters(in: .whitespacesAndNewlines).count > 10000){
+            let alert = UIAlertController(title: "", message: "최대 글자 수를 초과하였습니다", preferredStyle: UIAlertController.Style.alert)
+            let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+            alert.addAction(okAction)
+            present(alert, animated: true, completion: nil)
+        }
+        
+        if (textView.text.trimmingCharacters(in: .whitespacesAndNewlines).count == 0){
+            let alert = UIAlertController(title: "", message: "내용을 입력하세요", preferredStyle: UIAlertController.Style.alert)
             let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
             alert.addAction(okAction)
             present(alert, animated: true, completion: nil)
@@ -178,7 +185,6 @@ class MemoEditViewController: UIViewController {
 
         let old = realm.objects(ImageDao.self).filter("memoId = \(id)")
         
-       // print(new)
         try? realm.write({
             realm.delete(old)
             realm.add(new)
@@ -226,11 +232,6 @@ extension MemoEditViewController : UIImagePickerControllerDelegate, UINavigation
                 images.append(imageDao)
                 collectionView.reloadData()
             }
-//            if !images.contains(image) {
-//                images.append(image)
-//
-//                collectionView.reloadData()
-//            }
         }
         dismiss(animated: true, completion: nil)
     }
