@@ -129,8 +129,8 @@ class MemoEditViewController: UIViewController {
             make.trailing.equalTo(0)
             make.bottom.equalTo(0)
         }
-        
     }
+    
     
     @objc
     private func onImageButtonClicked(_ sender:UIButton){
@@ -144,17 +144,13 @@ class MemoEditViewController: UIViewController {
     private func onDoneButtonClicked(_ sender:UIButton){
         print(textView.text.count)
         if (textView.text.trimmingCharacters(in: .whitespacesAndNewlines).count > 10000){
-            let alert = UIAlertController(title: "", message: "최대 글자 수를 초과하였습니다", preferredStyle: UIAlertController.Style.alert)
-            let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
-            alert.addAction(okAction)
-            present(alert, animated: true, completion: nil)
+            showAlert("최대 글자 수를 초과하였습니다", "")
+            return
         }
         
         if (textView.text.trimmingCharacters(in: .whitespacesAndNewlines).count == 0){
-            let alert = UIAlertController(title: "", message: "내용을 입력하세요", preferredStyle: UIAlertController.Style.alert)
-            let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
-            alert.addAction(okAction)
-            present(alert, animated: true, completion: nil)
+            showAlert("내용을 입력하세요", "")
+            return
         }
         
         if (id == -1) {
@@ -205,6 +201,8 @@ class MemoEditViewController: UIViewController {
         }
         memo.updatedDate = Date()
     }
+    
+    
 
 }
 
@@ -215,10 +213,7 @@ extension MemoEditViewController : UIImagePickerControllerDelegate, UINavigation
             if let url = (info[UIImagePickerController.InfoKey.imageURL] as? NSURL)?.absoluteString{
                 for i in images{
                     if ( i.url == url){
-                        let alert = UIAlertController(title: "이미지 중복", message: "이미 이미지가 추가되었습니다", preferredStyle: UIAlertController.Style.alert)
-                        let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
-                        alert.addAction(okAction)
-                        present(alert, animated: true, completion: nil)
+                        showAlert("", "중복된 이미지입니다")
                         return
                     }
                 }
