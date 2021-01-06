@@ -13,7 +13,15 @@ class MemoViewCell: UICollectionViewCell {
     private var titleLabel:UILabel = UILabel()
     private var editDateLabel:UILabel = UILabel()
     private var infoLabel:UILabel = UILabel()
-    
+    private var view:UIView = UIView()
+    private var stackView:UIStackView = {
+        let sv:UIStackView = UIStackView()
+        sv.axis = .vertical
+        sv.spacing = 8
+        sv.translatesAutoresizingMaskIntoConstraints = false
+        sv.backgroundColor = .white
+        return sv
+    }()
     public func setCellView(_ memo:MemoDao){
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -37,9 +45,11 @@ class MemoViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        background.addSubview(titleLabel)
-        background.addSubview(editDateLabel)
-        background.addSubview(infoLabel)
+        background.addSubview(view)
+        stackView.addArrangedSubview(titleLabel)
+        stackView.addArrangedSubview(editDateLabel)
+        stackView.addArrangedSubview(infoLabel)
+        background.addSubview(stackView)
         self.contentView.addSubview(background)
         
         background.backgroundColor = .white
@@ -50,31 +60,39 @@ class MemoViewCell: UICollectionViewCell {
             make.trailing.equalTo(0)
         }
         
+        stackView.backgroundColor = .none
+        stackView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(16)
+            make.leading.equalToSuperview().offset(16)
+            make.bottom.lessThanOrEqualToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+        }
+        
         titleLabel.numberOfLines = 2
         titleLabel.lineBreakMode = .byTruncatingTail
         titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
         titleLabel.snp.makeConstraints{ make in
-            make.top.equalTo(4)
-            make.leading.equalTo(4)
-            make.trailing.equalTo(-4)
             make.height.lessThanOrEqualTo(40)
         }
         
         editDateLabel.textColor = .gray
         editDateLabel.snp.makeConstraints{make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(4)
-            make.trailing.equalTo(-4)
-            make.leading.equalTo(4)
             make.height.lessThanOrEqualTo(20)
         }
         
         infoLabel.numberOfLines = 2
         infoLabel.lineBreakMode = .byTruncatingTail
         infoLabel.snp.makeConstraints{ make in
-            make.top.equalTo(editDateLabel.snp.bottom).offset(4)
-            make.bottom.equalTo(-4)
-            make.leading.equalTo(4)
             make.trailing.equalTo(-4)
+        }
+        
+        view.backgroundColor = .white
+        view.alpha = 0.5
+        view.snp.makeConstraints{ make in
+            make.top.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.leading.equalToSuperview()
+            make.height.equalTo(stackView).offset(16)
         }
         
         
