@@ -23,9 +23,7 @@ class MemoDetailViewController: UIViewController {
             updateData()
         }
     }
-    private lazy var images:[ImageDao] = {
-        return realm.objects(ImageDao.self).filter("memoId = \(id)").sorted(byKeyPath: "no").toArray()
-    }()
+    private var images:[ImageDao] = [ImageDao]()
     
     private let scrollView:UIScrollView = {
         let sv:UIScrollView = UIScrollView()
@@ -67,31 +65,16 @@ class MemoDetailViewController: UIViewController {
         if id != -1 {
             print("!")
             updateData()
+            updateImage()
         }
     }
    
     
     private func setUI(){
-        
-        
         self.view.addSubview(scrollView)
         scrollView.addSubview(scrollViewContent)
         
-        for i in images{
-            let imageView = UIImageView()
-            imageView.image = i.image
-            scrollViewContent.addArrangedSubview(imageView)
-
-            imageView.snp.makeConstraints{ make in
-                make.top.equalTo(8)
-                make.leading.equalTo(8)
-                make.trailing.equalTo(8)
-                make.height.greaterThanOrEqualTo(0)
-            }
-        }
-        
-        scrollViewContent.addArrangedSubview(contentLabel)
-
+        //updateImage()
 
         scrollView.snp.makeConstraints{ make in
             make.top.equalTo(guide.top)
@@ -104,16 +87,6 @@ class MemoDetailViewController: UIViewController {
             make.edges.equalToSuperview()
             make.width.equalToSuperview()
         }
-        
-        
-        contentLabel.snp.makeConstraints { make in
-            make.top.equalTo(8)
-            make.leading.equalTo(8)
-            make.trailing.equalTo(8)
-            make.height.greaterThanOrEqualTo(0)
-        }
-                
-        //scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: 2000)
     }
     
     @objc
@@ -127,6 +100,28 @@ class MemoDetailViewController: UIViewController {
         memo = realm.objects(MemoDao.self).filter("id = \(id)").first!
         navigationItem.title = memo.title
         contentLabel.text = "\(memo.title)\n\(memo.content ?? "")"
+    }
+    
+    private func updateImage(){
+        for i in scrollViewContent.arrangedSubviews{
+            i.removeFromSuperview()
+        }
+        
+        
+        images = realm.objects(ImageDao.self).filter("memoId = \(id)").sorted(byKeyPath: "no").toArray()
+        scrollViewContent.addArrangedSubview(contentLabel)
+
+        for i in images{
+            let imageView = UIImageView()
+            let ratio = i.image!.size.width / i.image!.size.height
+            imageView.image = i.image
+            scrollViewContent.addArrangedSubview(imageView)
+            
+            imageView.snp.makeConstraints { make in
+                make.width.equalToSuperview()
+                make.height.equalTo(imageView.snp.width).dividedBy(ratio)
+            }
+        }
     }
 
 }
