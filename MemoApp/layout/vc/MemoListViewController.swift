@@ -31,14 +31,6 @@ class MemoListViewController: UIViewController{ //, UICollectionViewDataSource, 
         return action
     }()
     
-    private lazy var buttonSort:UIButton = {
-        let button:UIButton = UIButton()
-        button.backgroundColor = .red
-        button.setImage(UIImage(named: "sort"), for: .normal)
-        button.addTarget(self, action: #selector(onButtonActionSheetClicked(_:)), for: .touchUpInside)
-        return button
-    }()
-    
     
     private lazy var collectionView:UICollectionView = {
         let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout()
@@ -56,14 +48,14 @@ class MemoListViewController: UIViewController{ //, UICollectionViewDataSource, 
         super.viewDidLoad()
         navigationItem.title = "List"
         
-        var toolbarItems = [UIBarButtonItem]()
-    
-        toolbarItems.append(UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(onButtonAddClicked(_:))))
+        let image = UIImage(named: "sort")?.resizeImage(size: CGSize(width: 20, height: 20))
+        let actionSheetButton = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(onButtonActionSheetClicked(_:)))
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(onButtonAddClicked(_:)))
         self.navigationController?.isToolbarHidden = true
-        self.navigationItem.setRightBarButtonItems(toolbarItems, animated: true)
+        self.navigationItem.setRightBarButton(addButton, animated: true)
+        self.navigationItem.setLeftBarButton(actionSheetButton, animated: true)
         
-        print(Realm.Configuration.defaultConfiguration.fileURL!)
-
+        //print(Realm.Configuration.defaultConfiguration.fileURL!)
         setUI()
     }
     
@@ -81,18 +73,10 @@ class MemoListViewController: UIViewController{ //, UICollectionViewDataSource, 
         self.view.addSubview(collectionView)
         collectionView.backgroundColor = .white
         collectionView.snp.makeConstraints { make in
-            make.trailing.equalTo(guide.trailing)
-            make.leading.equalTo(guide.leading)
+            make.trailing.equalTo(guide.trailing).offset(-8)
+            make.leading.equalTo(guide.leading).offset(8)
             make.top.equalTo(guide.top)
             make.bottom.equalTo(0)
-        }
-        
-        self.view.addSubview(buttonSort)
-        buttonSort.snp.makeConstraints { make in
-            make.leading.equalTo(guide.leading).offset(10)
-            make.top.equalTo(guide.top).offset(10)
-            make.width.equalTo(30)
-            make.height.equalTo(30)
         }
         
     }
@@ -145,7 +129,7 @@ extension MemoListViewController : UICollectionViewDataSource, UICollectionViewD
     
     // 사이즈
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let collectionViewCellWithd = collectionView.frame.width / 2 - 1
+        let collectionViewCellWithd = collectionView.frame.width / 2 - 4
         
         return CGSize(width: collectionViewCellWithd, height: collectionViewCellWithd)
         
@@ -156,13 +140,13 @@ extension MemoListViewController : UICollectionViewDataSource, UICollectionViewD
     //위아래 라인 간격
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
 
-        return 1
+        return 8
         
     }
     
     //옆 라인 간격
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 1
+        return 8
         
     }
     
@@ -214,4 +198,16 @@ extension Results {
       }
     }
  }
+
+extension UIImage {
+  func resizeImage(size: CGSize) -> UIImage {
+    let originalSize = self.size
+    let ratio: CGFloat = {
+        return originalSize.width > originalSize.height ? 1 / (size.width / originalSize.width) :
+                                                          1 / (size.height / originalSize.height)
+    }()
+
+    return UIImage(cgImage: self.cgImage!, scale: self.scale * ratio, orientation: self.imageOrientation)
+  }
+}
 
