@@ -8,18 +8,18 @@
 import UIKit
 
 class ImageViewCell: UICollectionViewCell {
-    public var imageView:UIImageView = UIImageView()
-    public var eraseButton:UIButton = UIButton()
+    public var imageView: UIImageView = UIImageView()
+    public var eraseButton: UIButton = UIButton()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.contentView.addSubview(imageView)
-        //self.contentView.addSubview(eraseButton)
+        // self.contentView.addSubview(eraseButton)
         
         imageView.backgroundColor = .systemBlue
         imageView.layer.cornerRadius = 20.0
         imageView.layer.masksToBounds = true
-        imageView.snp.makeConstraints{ make in
+        imageView.snp.makeConstraints { make in
             make.top.equalTo(8)
             make.bottom.equalTo(-8)
             make.trailing.equalTo(-8)

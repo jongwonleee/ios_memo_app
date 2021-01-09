@@ -8,6 +8,7 @@ target 'MemoApp' do
   # Pods for MemoApp
   pod 'SnapKit', '~> 5.0.0'
   pod 'RealmSwift'
+  pod 'SwiftLint'
 
   target 'MemoAppTests' do
     inherit! :search_paths

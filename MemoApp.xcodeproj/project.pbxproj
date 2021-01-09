@@ -113,41 +113,48 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		C12EB04C2593882000F1E905 /* layout */ = {
+		C12EB04C2593882000F1E905 /* Layout */ = {
 			isa = PBXGroup;
 			children = (
-				C12EB0512593892900F1E905 /* cell */,
-				C12EB0502593891F00F1E905 /* vc */,
+				C12EB0512593892900F1E905 /* Cell */,
+				C12EB0502593891F00F1E905 /* VC */,
 			);
-			path = layout;
+			path = Layout;
 			sourceTree = "<group>";
 		};
-		C12EB0502593891F00F1E905 /* vc */ = {
+		C12EB0502593891F00F1E905 /* VC */ = {
 			isa = PBXGroup;
 			children = (
 				C1E498332590703B00840AD7 /* MemoListViewController.swift */,
 				C12EB03E25932F0C00F1E905 /* MemoDetailViewController.swift */,
 				C12EB0462593302700F1E905 /* MemoEditViewController.swift */,
 			);
-			path = vc;
+			path = VC;
 			sourceTree = "<group>";
 		};
-		C12EB0512593892900F1E905 /* cell */ = {
+		C12EB0512593892900F1E905 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
 				C12EB0522593896900F1E905 /* MemoViewCell.swift */,
 				C12EB06C259A307800F1E905 /* ImageViewCell.swift */,
 			);
-			path = cell;
+			path = Cell;
 			sourceTree = "<group>";
 		};
-		C12EB07A259DB1EA00F1E905 /* dao */ = {
+		C12EB07A259DB1EA00F1E905 /* DAO */ = {
 			isa = PBXGroup;
 			children = (
 				C12EB07B259DB1FE00F1E905 /* MemoDao.swift */,
 				C12EB089259DB3AE00F1E905 /* ImageDao.swift */,
 			);
-			path = dao;
+			path = DAO;
+			sourceTree = "<group>";
+		};
+		C1475C2525A980DA0089F59E /* Common */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		C1E498232590703B00840AD7 = {
@@ -175,8 +182,9 @@
 		C1E4982E2590703B00840AD7 /* MemoApp */ = {
 			isa = PBXGroup;
 			children = (
-				C12EB07A259DB1EA00F1E905 /* dao */,
-				C12EB04C2593882000F1E905 /* layout */,
+				C1475C2525A980DA0089F59E /* Common */,
+				C12EB07A259DB1EA00F1E905 /* DAO */,
+				C12EB04C2593882000F1E905 /* Layout */,
 				C1E4982F2590703B00840AD7 /* AppDelegate.swift */,
 				C1E498312590703B00840AD7 /* SceneDelegate.swift */,
 				C1E498352590703B00840AD7 /* Main.storyboard */,
@@ -230,6 +238,7 @@
 				C1E498292590703B00840AD7 /* Frameworks */,
 				C1E4982A2590703B00840AD7 /* Resources */,
 				B631594889EFB73259424F0B /* [CP] Embed Pods Frameworks */,
+				C1475C2925A993490089F59E /* Lint Script */,
 			);
 			buildRules = (
 			);
@@ -426,6 +435,24 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MemoApp/Pods-MemoApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		C1475C2925A993490089F59E /* Lint Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Lint Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/SwiftLint/swiftlint\" autocorrect\n";
 		};
 		C9AD9FF47CB0FBA58A47DE1E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

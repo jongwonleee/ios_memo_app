@@ -9,12 +9,12 @@ import Foundation
 import RealmSwift
 
 class ImageDao: Object {
-    @objc dynamic var memoId:Int = 0
-    @objc dynamic var no:Int = 0
-    @objc dynamic var data:Data = Data()
-    @objc dynamic var url:String = ""
+    @objc dynamic var memoId: Int = 0
+    @objc dynamic var no: Int = 0
+    @objc dynamic var data: Data = Data()
+    @objc dynamic var url: String = ""
 //    @objc dynamic var compoundKey:String = ""
-    var image:UIImage? {
+    var image: UIImage? {
         return UIImage(data: self.data)
     }
     

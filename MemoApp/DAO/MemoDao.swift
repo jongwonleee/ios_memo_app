@@ -9,12 +9,11 @@ import Foundation
 import RealmSwift
 
 class MemoDao: Object {
-    @objc dynamic var id:Int = 0
-    @objc dynamic var createdDate:Date = Date()
-    @objc dynamic var updatedDate:Date = Date()
-    @objc dynamic var title:String = ""
-    @objc dynamic var content:String?
-    
+    @objc dynamic var id: Int = 0
+    @objc dynamic var createdDate: Date = Date()
+    @objc dynamic var updatedDate: Date = Date()
+    @objc dynamic var title: String = ""
+    @objc dynamic var content: String?
     
     override static func primaryKey() -> String? {
         return "id"

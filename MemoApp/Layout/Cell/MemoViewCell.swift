@@ -8,21 +8,25 @@
 import UIKit
 import RealmSwift
 
+// TODO 배경 blur 하기
+
 class MemoViewCell: UICollectionViewCell {
-    public var background:UIButton = UIButton()
-    private var titleLabel:UILabel = UILabel()
-    private var editDateLabel:UILabel = UILabel()
-    private var infoLabel:UILabel = UILabel()
-    private var view:UIView = UIView()
-    private var stackView:UIStackView = {
-        let sv:UIStackView = UIStackView()
+    public var background: UIButton = UIButton()
+    private var titleLabel: UILabel = UILabel()
+    private var editDateLabel: UILabel = UILabel()
+    private var infoLabel: UILabel = UILabel()
+    private var view: UIView = UIView()
+    private var stackView: UIStackView = {
+         let sv: UIStackView = UIStackView()
         sv.axis = .vertical
         sv.spacing = 8
         sv.translatesAutoresizingMaskIntoConstraints = false
         sv.backgroundColor = .white
         return sv
     }()
-    public func setCellView(_ memo:MemoDao){
+    
+    // configure
+    public func setCellView(_ memo: MemoDao) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         
@@ -37,7 +41,7 @@ class MemoViewCell: UICollectionViewCell {
             background.subviews.first?.contentMode = .scaleAspectFill
             background.subviews.first?.layer.cornerRadius = 20.0
             background.subviews.first?.layer.masksToBounds = true
-        }else{
+        } else {
             background.setImage(nil, for: .normal)
             background.layoutIfNeeded()
         }
@@ -45,19 +49,24 @@ class MemoViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        let blurEffect = UIBlurEffect(style: .regular)
+        let visualEffectView = UIVisualEffectView(effect: blurEffect)
+        visualEffectView.frame = self.background.frame
         background.addSubview(view)
+        self.background.addSubview(visualEffectView)
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(editDateLabel)
         stackView.addArrangedSubview(infoLabel)
         background.addSubview(stackView)
+
         self.contentView.addSubview(background)
         
         background.backgroundColor = .white
-        background.snp.makeConstraints{ make in
-            make.top.equalTo(0)
+        background.snp.makeConstraints { make in
+            make.top.equalTo(0).inset(8)
             make.bottom.equalTo(0)
-            make.leading.equalTo(0)
-            make.trailing.equalTo(0)
+            make.leading.equalTo(0).inset(4)
+            make.trailing.equalTo(0).inset(4)
         }
         
         stackView.backgroundColor = .none
@@ -71,31 +80,32 @@ class MemoViewCell: UICollectionViewCell {
         titleLabel.numberOfLines = 2
         titleLabel.lineBreakMode = .byTruncatingTail
         titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
-        titleLabel.snp.makeConstraints{ make in
-            make.height.lessThanOrEqualTo(40)
+        titleLabel.snp.makeConstraints { make in
+            // make.height.lessThanOrEqualTo(40)
         }
         
         editDateLabel.textColor = .white
         titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
-        editDateLabel.snp.makeConstraints{make in
-            make.height.lessThanOrEqualTo(20)
+        editDateLabel.snp.makeConstraints {make in
+            // make.height.lessThanOrEqualTo(20)
         }
         
         infoLabel.numberOfLines = 2
         infoLabel.lineBreakMode = .byTruncatingTail
-        infoLabel.snp.makeConstraints{ make in
+        infoLabel.snp.makeConstraints { make in
             make.trailing.equalTo(-4)
         }
         
-        view.backgroundColor = .white
-        view.alpha = 0.5
-        view.snp.makeConstraints{ make in
+//        view.backgroundColor = .white
+//        view.alpha = 0.5
+        view.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.trailing.equalToSuperview()
             make.leading.equalToSuperview()
             make.bottom.equalTo(stackView).offset(16)
         }
-        
+
+        background.layoutIfNeeded()
         
     }
     

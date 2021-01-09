@@ -11,30 +11,30 @@ import SnapKit
 
 class MemoDetailViewController: UIViewController {
     
-    private var id:Int = -1
-    private var memo:MemoDao = MemoDao()
-    public var memoId:Int
-    {
-        get{id}
+    private var id: Int = -1
+    private var memo: MemoDao = MemoDao()
+    public var memoId: Int {
+        get {id}
         
-        //TODO 나중에 숫자가 아니라 dao로 변경하기
-        set(newVal){
+        // TODO 나중에 숫자가 아니라 dao로 변경하기
+        set(newVal) {
             id = newVal
             updateData()
         }
     }
-    private var images:[ImageDao] = [ImageDao]()
+    private var images: [ImageDao] = [ImageDao]()
     
-    private let scrollView:UIScrollView = {
-        let sv:UIScrollView = UIScrollView()
+    // TODO scrollView 잘 안쓰이고 collectionView section 2개로 변경 가능
+    private let scrollView: UIScrollView = {
+        let sv: UIScrollView = UIScrollView()
         sv.isScrollEnabled = true
         sv.backgroundColor = .white
         sv.translatesAutoresizingMaskIntoConstraints = false
         return sv
     }()
     
-    private let contentLabel:UILabel = {
-        let label:UILabel = UILabel()
+    private let contentLabel: UILabel = {
+        let label: UILabel = UILabel()
         label.font = label.font.withSize(20)
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
@@ -42,8 +42,8 @@ class MemoDetailViewController: UIViewController {
         return label
     }()
     
-    private let scrollViewContent:UIStackView = {
-        let sv:UIStackView = UIStackView()
+    private let scrollViewContent: UIStackView = {
+        let sv: UIStackView = UIStackView()
         sv.axis = .vertical
         sv.spacing = 8
         sv.translatesAutoresizingMaskIntoConstraints = false
@@ -63,20 +63,18 @@ class MemoDetailViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         if id != -1 {
-            print("!")
             updateData()
             updateImage()
         }
     }
-   
     
-    private func setUI(){
+    private func setUI() {
         self.view.addSubview(scrollView)
         scrollView.addSubview(scrollViewContent)
         
-        //updateImage()
+        // updateImage()
 
-        scrollView.snp.makeConstraints{ make in
+        scrollView.snp.makeConstraints { make in
             make.top.equalTo(guide.top)
             make.bottom.equalTo(0)
             make.leading.equalTo(guide.leading)
@@ -90,28 +88,27 @@ class MemoDetailViewController: UIViewController {
     }
     
     @objc
-    private func onButtonEditClicked(_ sender:UIButton) {
-        let vc:MemoEditViewController = MemoEditViewController()
+    private func onButtonEditClicked(_ sender: UIButton) {
+        let vc: MemoEditViewController = MemoEditViewController()
         vc.memoId = id
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    private func updateData(){
+    private func updateData() {
         memo = realm.objects(MemoDao.self).filter("id = \(id)").first!
         navigationItem.title = memo.title
         contentLabel.text = "\(memo.title)\n\(memo.content ?? "")"
     }
     
-    private func updateImage(){
-        for i in scrollViewContent.arrangedSubviews{
+    private func updateImage() {
+        for i in scrollViewContent.arrangedSubviews {
             i.removeFromSuperview()
         }
-        
         
         images = realm.objects(ImageDao.self).filter("memoId = \(id)").sorted(byKeyPath: "no").toArray()
         scrollViewContent.addArrangedSubview(contentLabel)
 
-        for i in images{
+        for i in images {
             let imageView = UIImageView()
             let ratio = i.image!.size.width / i.image!.size.height
             imageView.image = i.image
