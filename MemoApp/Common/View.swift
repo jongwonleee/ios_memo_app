@@ -20,11 +20,11 @@ class View: UIView {
     }
     
     func commonSetup() {
-        createSubviews()
+        //createSubviews()
         //configureConstraints()
     }
     
-    func createSubviews() {}
+    func createSubviews(_ view: UIView) {}
     
     func configureConstraints(_ guide: ConstraintLayoutGuideDSL) {}
 }

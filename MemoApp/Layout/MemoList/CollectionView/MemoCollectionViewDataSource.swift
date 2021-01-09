@@ -19,19 +19,16 @@ class MemoCollectionViewDataSource: NSObject, UICollectionViewDataSource {
         switch type {
         case .createdDate:
             self.memo.sort { $0.createdDate > $1.createdDate }
-            break
         case .title:
             self.memo.sort { $0.title > $1.title }
-            break
         case .updatedDate:
             self.memo.sort { $0.updatedDate > $1.updatedDate }
-            break
         }
     }
     
-    var memo:[MemoDao] = [MemoDao]()
+    var memo: [MemoDao] = [MemoDao]()
     
-    public func loadMemo(){
+    public func loadMemo() {
         memo = RealmManager.shared.getMemo()?.toArray() ?? [MemoDao]()
     }
     
@@ -40,8 +37,8 @@ class MemoCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RowCell", for: indexPath) as? MemoViewCell else {
-            return collectionView.dequeueReusableCell(withReuseIdentifier: "RowCell", for: indexPath)
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MemoViewCell.identifier, for: indexPath) as? MemoViewCell else {
+            return collectionView.dequeueReusableCell(withReuseIdentifier: MemoViewCell.identifier, for: indexPath)
         }
         cell.setCellView(memo[indexPath.row])
 

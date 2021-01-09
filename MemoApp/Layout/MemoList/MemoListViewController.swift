@@ -25,17 +25,18 @@ class MemoListViewController: ViewController {
         let leftItems = [UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(onButtonActionSheetClicked(_:)))]
         let rightItems = [UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(onButtonAddClicked(_:)))]
         
-        binding.createSubviews()
         self.configureNavigationBar(title: "List", leftItems: leftItems, rightItems: rightItems)
+        
+        self.binding.createSubviews(self.view)
     }
     
     override func configureConstraints() {
-        binding.configureConstraints(guide)
+        self.binding.configureConstraints(guide)
     }
     
     // 램 관리 클래스 만들기
     override func viewWillAppear(_ animated: Bool) {
-        //binding.dataSource.loadMemo()
+        binding.dataSource.loadMemo()
         binding.collectionView.reloadData()
     }
 
