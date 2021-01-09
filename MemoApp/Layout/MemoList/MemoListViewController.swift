@@ -32,6 +32,15 @@ class MemoListViewController: ViewController {
     
     override func configureConstraints() {
         self.binding.configureConstraints(guide)
+        if let delegate = self.binding.delegate {
+            delegate.cellDidClick = self.cellDidClick
+        }
+    }
+    
+    private func cellDidClick (_ pos: Int) {
+        let vc: MemoDetailViewController = MemoDetailViewController()
+        vc.memoId = pos
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     // 램 관리 클래스 만들기
@@ -40,10 +49,9 @@ class MemoListViewController: ViewController {
         binding.collectionView.reloadData()
     }
 
-    
     @objc
     private func onButtonActionSheetClicked(_ sender: UIButton) {
-        if binding.actionSheetSort.isBeingPresented{
+        if !binding.actionSheetSort.isBeingPresented {
             present(binding.actionSheetSort, animated: true, completion: nil)
         }
     }

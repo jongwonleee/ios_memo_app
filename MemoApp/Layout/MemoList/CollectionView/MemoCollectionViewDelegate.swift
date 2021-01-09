@@ -7,10 +7,13 @@
 
 import UIKit
 
+
 class MemoCollectionViewDelegate: NSObject, UICollectionViewDelegate {
+    
+    var cellDidClick: ((Int) -> Void)?
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//            let vc: MemoDetailViewController = MemoDetailViewController()
-//            vc.memoId = 
-//            self.navigationController?.pushViewController(vc, animated: true)
+        guard let onClick = cellDidClick else { return }
+        onClick(indexPath.row)
     }
 }
