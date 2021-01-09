@@ -9,10 +9,10 @@ import RealmSwift
 
 extension Results {
     func toArray() -> [Element] {
-      return compactMap {
-        $0
-      }
+        return compactMap {
+            $0
+        }
     }
- }
+}
 
 

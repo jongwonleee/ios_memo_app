@@ -11,6 +11,7 @@ import RealmSwift
 // TODO 배경 blur 하기
 
 class MemoViewCell: UICollectionViewCell {
+    public static let identifier:String = "MemoCell"
     public var background: UIButton = UIButton()
     private var titleLabel: UILabel = UILabel()
     private var editDateLabel: UILabel = UILabel()

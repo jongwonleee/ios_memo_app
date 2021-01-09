@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class MemoEditViewController: UIViewController {
+class MemoEditViewController: ViewController {
     
     private var id: Int = -1
     private var memo: MemoDao = MemoDao()

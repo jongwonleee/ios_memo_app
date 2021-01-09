@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import SnapKit
 
-class MemoDetailViewController: UIViewController {
+class MemoDetailViewController: ViewController {
     
     private var id: Int = -1
     private var memo: MemoDao = MemoDao()
