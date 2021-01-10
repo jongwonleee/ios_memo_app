@@ -12,7 +12,7 @@ import RealmSwift
 
 class MemoViewCell: UICollectionViewCell {
     public static let identifier:String = "MemoCell"
-    public var background: UIButton = UIButton()
+    public var background: UIImageView = UIImageView()
     private var titleLabel: UILabel = UILabel()
     private var editDateLabel: UILabel = UILabel()
     private var infoLabel: UILabel = UILabel()
@@ -36,14 +36,12 @@ class MemoViewCell: UICollectionViewCell {
         editDateLabel.text = dateFormatter.string(from: memo.updatedDate)
         infoLabel.text = memo.content
 
-        if let image = try! Realm().objects(ImageDao.self).filter("memoId = \(memo.id)").first {
-            background.setImage(image.image, for: .normal)
-            background.layoutIfNeeded()
-            background.subviews.first?.contentMode = .scaleAspectFill
-            background.subviews.first?.layer.cornerRadius = 20.0
-            background.subviews.first?.layer.masksToBounds = true
+        if let image = try? Realm().objects(ImageDao.self).filter("memoId = \(memo.id)").first {
+            background.layer.cornerRadius = 20.0
+            background.layer.masksToBounds = true
+            background.image = image.image
         } else {
-            background.setImage(nil, for: .normal)
+            background.image = nil
             background.layoutIfNeeded()
         }
     }

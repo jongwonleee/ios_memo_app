@@ -135,14 +135,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		C12EB04C2593882000F1E905 /* Layout */ = {
+		C12EB04C2593882000F1E905 /* Module */ = {
 			isa = PBXGroup;
 			children = (
 				C1475C4B25AA00370089F59E /* MemoEdit */,
 				C1475C4A25AA001F0089F59E /* MemoDetail */,
 				C1475C4925AA00110089F59E /* MemoList */,
 			);
-			path = Layout;
+			path = Module;
 			sourceTree = "<group>";
 		};
 		C12EB07A259DB1EA00F1E905 /* Realm */ = {
@@ -241,7 +241,7 @@
 				C1475C4825A9FFFF0089F59E /* Extension */,
 				C1475C2525A980DA0089F59E /* Common */,
 				C12EB07A259DB1EA00F1E905 /* Realm */,
-				C12EB04C2593882000F1E905 /* Layout */,
+				C12EB04C2593882000F1E905 /* Module */,
 				C1E4982F2590703B00840AD7 /* AppDelegate.swift */,
 				C1E498312590703B00840AD7 /* SceneDelegate.swift */,
 				C1E498352590703B00840AD7 /* Main.storyboard */,

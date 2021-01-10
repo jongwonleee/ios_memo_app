@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 class MemoCollectionViewDelegateFlowLayout: NSObject, UICollectionViewDelegateFlowLayout {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -34,4 +33,5 @@ class MemoCollectionViewDelegateFlowLayout: NSObject, UICollectionViewDelegateFl
         return 0
         
     }
+    
 }

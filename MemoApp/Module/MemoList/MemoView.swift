@@ -33,12 +33,15 @@ class MemoView: View {
     }()
     
     let dataSource: MemoCollectionViewDataSource = MemoCollectionViewDataSource()
-    weak var delegate: MemoCollectionViewDelegate? = MemoCollectionViewDelegate()
+    //weak var delegate: MemoCollectionViewDelegate? = MemoCollectionViewDelegate()
     let flowLayout: MemoCollectionViewDelegateFlowLayout = MemoCollectionViewDelegateFlowLayout()
-    
+    let delegate: MemoCollectionViewDelegate = MemoCollectionViewDelegate()
+
     override func createSubviews(_ view: UIView) {
-        collectionView.dataSource = dataSource
-        collectionView.delegate = flowLayout
+       // delegate = MemoCollectionViewDelegate()
+        collectionView.dataSource = self.dataSource
+        collectionView.delegate = delegate
+        //collectionView.delegatef
         collectionView.register(MemoViewCell.self, forCellWithReuseIdentifier: MemoViewCell.identifier)
         collectionView.backgroundColor = .white
         view.addSubview(collectionView)
