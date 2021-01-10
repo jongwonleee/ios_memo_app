@@ -8,30 +8,10 @@
 import UIKit
 import SnapKit
 
-class MemoView: View {
+class MemoListView: View {
     
     let collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-    
-    lazy var actionSheetSort: UIAlertController = {
-        let action: UIAlertController = UIAlertController(title: "정렬 방식", message: "선택한 방식으로 메모들이 정렬됩니다.", preferredStyle: .actionSheet)
-        action.addAction(UIAlertAction(title: "제목", style: .default, handler: { (action) in
-            self.dataSource.sort(.title)
-            self.collectionView.reloadData()
-        }))
-        action.addAction(UIAlertAction(title: "생성일", style: .default, handler: { (action) in
-            self.dataSource.sort(.createdDate)
-            self.collectionView.reloadData()
-            
-        }))
-        action.addAction(UIAlertAction(title: "수정일", style: .default, handler: { (action) in
-            self.dataSource.sort(.updatedDate)
-            self.collectionView.reloadData()
-            
-        }))
-        action.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
-        return action
-    }()
-    
+    let actionSheetSort: ActionSheetSort = ActionSheetSort()
     let dataSource: MemoCollectionViewDataSource = MemoCollectionViewDataSource()
     let flowLayout: MemoCollectionViewDelegateFlowLayout = MemoCollectionViewDelegateFlowLayout()
 

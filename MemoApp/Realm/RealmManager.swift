@@ -12,27 +12,37 @@ protocol DatabaseProviding {
     func addMemo(_ memo: MemoDao)
     func updateMemo(_ memo: [MemoDao])
     func getMemo() -> Results<MemoDao>?
+    func getImage() -> Results<ImageDao>?
+    func addImages(_ images: [ImageDao])
 }
 
 class RealmManager: DatabaseProviding {
+    func addImages(_ images: [ImageDao]) {
+        try? realm?.write {
+            realm?.add(images)
+        }
+    }
+    
+    func getImage() -> Results<ImageDao>? {
+        try? realm?.objects(ImageDao.self)
+    }
+    
     func addMemo(_ memo: MemoDao) {
-        try? realm?.write{
+        try? realm?.write {
             realm?.add(memo)
         }
     }
     
     func updateMemo(_ memo: [MemoDao]) {
-        try? realm?.write{
+        try? realm?.write {
             realm?.add(memo, update: .modified)
         }
-
     }
     
     func getMemo() -> Results<MemoDao>? {
         try? realm?.objects(MemoDao.self)
     }
     
-
     public static let shared = RealmManager()
 
     let realm: Realm?

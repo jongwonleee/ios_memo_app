@@ -9,11 +9,25 @@ import UIKit
 import SnapKit
 import RealmSwift
 
-class MemoListViewController: ViewController {
+class MemoListViewController: ViewController, ActionSheetSortDelegate {
+    func titleDidTap(_ sender: UIAlertAction) {
+        binding.dataSource.sort(.title)
+        binding.collectionView.reloadData()
+    }
+    
+    func createdDateDidTap(_ sender: UIAlertAction) {
+        binding.dataSource.sort(.createdDate)
+        binding.collectionView.reloadData()
+    }
+    
+    func editDateDidTap(_ sender: UIAlertAction) {
+        binding.dataSource.sort(.updatedDate)
+        binding.collectionView.reloadData()
+    }
     
     // TODO string 파일로 따로 관리 (strings)
 
-    let binding = MemoView()
+    let binding = MemoListView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,18 +40,18 @@ class MemoListViewController: ViewController {
         let rightItems = [UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(onButtonAddClicked(_:)))]
         
         self.configureNavigationBar(title: "List", leftItems: leftItems, rightItems: rightItems)
-        
         self.binding.createSubviews(self.view)
     }
     
     override func configureConstraints() {
         self.binding.configureConstraints(guide)
         self.binding.flowLayout.cellDidClick = self.cellDidClick
+        self.binding.actionSheetSort.delegate = self
     }
     
     private func cellDidClick (_ pos: Int) {
         let vc: MemoDetailViewController = MemoDetailViewController()
-        vc.memoId = pos
+        vc.memo = binding.dataSource.memo[pos]
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
