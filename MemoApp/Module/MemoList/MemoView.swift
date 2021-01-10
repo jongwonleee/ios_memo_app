@@ -36,14 +36,16 @@ class MemoView: View {
     let flowLayout: MemoCollectionViewDelegateFlowLayout = MemoCollectionViewDelegateFlowLayout()
 
     override func createSubviews(_ view: UIView) {
+        super.createSubviews(view)
         collectionView.dataSource = self.dataSource
         collectionView.delegate = flowLayout
         collectionView.register(MemoViewCell.self, forCellWithReuseIdentifier: MemoViewCell.identifier)
         collectionView.backgroundColor = .white
-        view.addSubview(collectionView)
+        self.addSubview(collectionView)
     }
     
     override func configureConstraints(_ guide: ConstraintLayoutGuideDSL) {
+        super.configureConstraints(guide)
         collectionView.snp.makeConstraints { make in
             make.trailing.equalTo(guide.trailing).offset(-8)
             make.leading.equalTo(guide.leading).offset(8)

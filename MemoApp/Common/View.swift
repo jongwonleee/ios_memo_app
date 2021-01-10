@@ -24,7 +24,18 @@ class View: UIView {
         //configureConstraints()
     }
     
-    func createSubviews(_ view: UIView) {}
+//    func addSubviews(_ view: UIView) {
+//        createSubviews()
+//        view.addSubview(view)
+//    }
     
-    func configureConstraints(_ guide: ConstraintLayoutGuideDSL) {}
+    func createSubviews(_ view: UIView) {
+        view.addSubview(self)
+    }
+    
+    func configureConstraints(_ guide: ConstraintLayoutGuideDSL) {
+        self.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+    }
 }
