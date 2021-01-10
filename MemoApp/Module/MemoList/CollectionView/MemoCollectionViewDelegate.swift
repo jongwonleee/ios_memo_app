@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 class MemoCollectionViewDelegate: NSObject, UICollectionViewDelegate {
     
     var cellDidClick: ((Int) -> Void)?

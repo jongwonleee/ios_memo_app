@@ -9,6 +9,8 @@ import UIKit
 
 class MemoCollectionViewDelegateFlowLayout: NSObject, UICollectionViewDelegateFlowLayout {
     
+    var cellDidClick: ((Int) -> Void)?
+
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -32,6 +34,11 @@ class MemoCollectionViewDelegateFlowLayout: NSObject, UICollectionViewDelegateFl
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
         
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let onClick = cellDidClick else { return }
+        onClick(indexPath.row)
     }
     
 }

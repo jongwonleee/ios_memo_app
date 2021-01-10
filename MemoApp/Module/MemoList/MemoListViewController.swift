@@ -32,9 +32,7 @@ class MemoListViewController: ViewController {
     
     override func configureConstraints() {
         self.binding.configureConstraints(guide)
-        self.binding.delegate.cellDidClick = self.cellDidClick
-//        if let delegate = self.binding.delegate as? MemoCo {
-//        }
+        self.binding.flowLayout.cellDidClick = self.cellDidClick
     }
     
     private func cellDidClick (_ pos: Int) {

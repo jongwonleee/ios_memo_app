@@ -11,14 +11,14 @@ import RealmSwift
 // TODO 배경 blur 하기
 
 class MemoViewCell: UICollectionViewCell {
-    public static let identifier:String = "MemoCell"
+    public static let identifier: String = "MemoCell"
     public var background: UIImageView = UIImageView()
     private var titleLabel: UILabel = UILabel()
     private var editDateLabel: UILabel = UILabel()
     private var infoLabel: UILabel = UILabel()
     private var view: UIView = UIView()
     private var stackView: UIStackView = {
-         let sv: UIStackView = UIStackView()
+        let sv: UIStackView = UIStackView()
         sv.axis = .vertical
         sv.spacing = 8
         sv.translatesAutoresizingMaskIntoConstraints = false
@@ -35,7 +35,7 @@ class MemoViewCell: UICollectionViewCell {
         titleLabel.text = memo.title
         editDateLabel.text = dateFormatter.string(from: memo.updatedDate)
         infoLabel.text = memo.content
-
+        
         if let image = try? Realm().objects(ImageDao.self).filter("memoId = \(memo.id)").first {
             background.layer.cornerRadius = 20.0
             background.layer.masksToBounds = true
@@ -57,7 +57,7 @@ class MemoViewCell: UICollectionViewCell {
         stackView.addArrangedSubview(editDateLabel)
         stackView.addArrangedSubview(infoLabel)
         background.addSubview(stackView)
-
+        
         self.contentView.addSubview(background)
         
         background.backgroundColor = .white
@@ -95,15 +95,15 @@ class MemoViewCell: UICollectionViewCell {
             make.trailing.equalTo(-4)
         }
         
-//        view.backgroundColor = .white
-//        view.alpha = 0.5
+        //        view.backgroundColor = .white
+        //        view.alpha = 0.5
         view.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.trailing.equalToSuperview()
             make.leading.equalToSuperview()
             make.bottom.equalTo(stackView).offset(16)
         }
-
+        
         background.layoutIfNeeded()
         
     }
