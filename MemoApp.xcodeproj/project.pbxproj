@@ -27,6 +27,9 @@
 		C1475C9125AA22520089F59E /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1475C9025AA22520089F59E /* UIViewController+.swift */; };
 		C1475CA425AB64600089F59E /* ActionSheetSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1475CA325AB64600089F59E /* ActionSheetSort.swift */; };
 		C1475CAC25AB6FD60089F59E /* MemoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1475CAB25AB6FD60089F59E /* MemoDetailView.swift */; };
+		C1475CB225AB76380089F59E /* ImageCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1475CB125AB76380089F59E /* ImageCollectionViewDataSource.swift */; };
+		C1475CBA25AB77410089F59E /* ImageCollectionViewDelegateFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1475CB925AB77410089F59E /* ImageCollectionViewDelegateFlowLayout.swift */; };
+		C1475CBF25AB777E0089F59E /* MemoEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1475CBE25AB777E0089F59E /* MemoEditView.swift */; };
 		C1E498302590703B00840AD7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1E4982F2590703B00840AD7 /* AppDelegate.swift */; };
 		C1E498322590703B00840AD7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1E498312590703B00840AD7 /* SceneDelegate.swift */; };
 		C1E498342590703B00840AD7 /* MemoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1E498332590703B00840AD7 /* MemoListViewController.swift */; };
@@ -80,6 +83,9 @@
 		C1475C9025AA22520089F59E /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		C1475CA325AB64600089F59E /* ActionSheetSort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionSheetSort.swift; sourceTree = "<group>"; };
 		C1475CAB25AB6FD60089F59E /* MemoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoDetailView.swift; sourceTree = "<group>"; };
+		C1475CB125AB76380089F59E /* ImageCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewDataSource.swift; sourceTree = "<group>"; };
+		C1475CB925AB77410089F59E /* ImageCollectionViewDelegateFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewDelegateFlowLayout.swift; sourceTree = "<group>"; };
+		C1475CBE25AB777E0089F59E /* MemoEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoEditView.swift; sourceTree = "<group>"; };
 		C1E4982C2590703B00840AD7 /* MemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1E4982F2590703B00840AD7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C1E498312590703B00840AD7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -201,8 +207,10 @@
 		C1475C4B25AA00370089F59E /* MemoEdit */ = {
 			isa = PBXGroup;
 			children = (
+				C1475CB025AB761F0089F59E /* CollectionView */,
 				C12EB0462593302700F1E905 /* MemoEditViewController.swift */,
 				C12EB06C259A307800F1E905 /* ImageViewCell.swift */,
+				C1475CBE25AB777E0089F59E /* MemoEditView.swift */,
 			);
 			path = MemoEdit;
 			sourceTree = "<group>";
@@ -212,6 +220,15 @@
 			children = (
 				C1475C6325AA067F0089F59E /* MemoCollectionViewDataSource.swift */,
 				C1475C6D25AA08B70089F59E /* MemoCollectionViewDelegateFlowLayout.swift */,
+			);
+			path = CollectionView;
+			sourceTree = "<group>";
+		};
+		C1475CB025AB761F0089F59E /* CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				C1475CB125AB76380089F59E /* ImageCollectionViewDataSource.swift */,
+				C1475CB925AB77410089F59E /* ImageCollectionViewDelegateFlowLayout.swift */,
 			);
 			path = CollectionView;
 			sourceTree = "<group>";
@@ -548,10 +565,12 @@
 				C1E498342590703B00840AD7 /* MemoListViewController.swift in Sources */,
 				C1475C9125AA22520089F59E /* UIViewController+.swift in Sources */,
 				C12EB06D259A307800F1E905 /* ImageViewCell.swift in Sources */,
+				C1475CB225AB76380089F59E /* ImageCollectionViewDataSource.swift in Sources */,
 				C1475C7425AA0AC60089F59E /* MemoListView.swift in Sources */,
 				C12EB07C259DB1FE00F1E905 /* MemoDao.swift in Sources */,
 				C12EB0472593302700F1E905 /* MemoEditViewController.swift in Sources */,
 				C12EB03F25932F0C00F1E905 /* MemoDetailViewController.swift in Sources */,
+				C1475CBF25AB777E0089F59E /* MemoEditView.swift in Sources */,
 				C1E498302590703B00840AD7 /* AppDelegate.swift in Sources */,
 				C1475C5F25AA05450089F59E /* Image.swift in Sources */,
 				C1475C5A25AA02610089F59E /* ViewController.swift in Sources */,
@@ -560,6 +579,7 @@
 				C1475C6E25AA08B70089F59E /* MemoCollectionViewDelegateFlowLayout.swift in Sources */,
 				C1475C5025AA013E0089F59E /* UIImage+.swift in Sources */,
 				C1475CA425AB64600089F59E /* ActionSheetSort.swift in Sources */,
+				C1475CBA25AB77410089F59E /* ImageCollectionViewDelegateFlowLayout.swift in Sources */,
 				C1475C7C25AA0B160089F59E /* View.swift in Sources */,
 				C12EB0532593896900F1E905 /* MemoViewCell.swift in Sources */,
 				C1E498322590703B00840AD7 /* SceneDelegate.swift in Sources */,

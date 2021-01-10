@@ -8,6 +8,8 @@
 import UIKit
 
 class ImageViewCell: UICollectionViewCell {
+    
+    public static let identifier:String = "ImageViewCell"
     public var imageView: UIImageView = UIImageView()
     public var eraseButton: UIButton = UIButton()
     
